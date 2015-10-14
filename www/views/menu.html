@@ -1,0 +1,28 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content class="menu-content">
+    <ion-nav-bar class="bar-calm">
+      <ion-nav-buttons side="left" >
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-light">
+      <h1 class="title">Red Bull</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+          <ion-item class="menu-item"href="#/help"><i class="icon1 ion-star" ng-class="cat.icon"></i> Timeline</ion-item>
+          <ion-item class="menu-item" href="#/albums"><i class="icon1 ion-camera" ng-class="cat.icon"> </i> Photos</ion-item>
+          <ion-item class="menu-item" href="#/events"><i class="icon1 ion-calendar" ng-class="cat.icon"></i> Events</ion-item>
+          <ion-item class="menu-item" href="#/videos"><i class="icon1 ion-videocamera" ng-class="cat.icon"> </i> Videos</ion-item>
+          <ion-item class="menu-item"href="#/product"><i class="icon1 ion-bag" ng-class="cat.icon"></i> Shop</ion-item>
+          <ion-item class="menu-item" href="#"><i class="icon1 ion-pricetags" ng-class="cat.icon"> </i> Deals</ion-item>
+            <div class="item item-divider"> More Information</div>
+          <ion-item class="menu-item" href="#/about"><i class="icon1 ion-information-circled" ng-class="cat.icon"></i> About us</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

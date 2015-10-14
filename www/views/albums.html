@@ -1,0 +1,18 @@
+<ion-view title="{{title}}" >
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="toggleSearch()"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header" ng-init="init()">
+    <div collection-repeat="photo in photos|orderBy:'-photo.created_time'" >
+      <div class="card photo-card">
+        <div class="item item-text-wrap">
+          <img class="col col-12 album-p" ng-src="{{photo.source}}">
+          <div class="col col-12 text">
+          <p class="col col-12 photo-p"><i class="icon2 ion-location"></i>{{item.description.length > 50 ? '...' : ''}} <strong>{{photo.place.name}}<strong></p>
+          <p class="col col-12 photo-p"><i class="icon2 ion-chatbox"></i> {{photo.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

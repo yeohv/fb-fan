@@ -1,0 +1,29 @@
+<ion-view title="{{title}}" >
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="toggleSearch()"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <div collection-repeat="product in products">
+      <div class="list">
+        <a class="item-thumbnail-left">
+          <img class="src" ng-src="{{product.src}}">
+          <h5 class="color1">{{product.title}}</h5>
+          <h5 class="color1">{{product.descr}}</h5>
+          <h6 class="color1">{{product.price}}</h6>
+        </a>
+
+        <ion-item class="tabs tabs-secondary tabs-icon-left calm">
+          <a class="tab-item color" ng-click="view(deal)" ng-class="{favouriteClass:deal.claimed=='claimTrue'}" ng-click="!showSearch">
+            <i class="icon2 ion-bag"></i> Claim
+          </a>
+          <a class="tab-item color" ng-click="toggleFavourite(deal)" ng-class="{favouriteClass:deal.favourited=='faveTrue'}">
+            <i class="icon2 ion-heart"></i> Fav
+          </a>
+          <a class="tab-item color" ng-click="share(deal)">
+            <i class="icon2 ion-share"></i> Share!
+          </a>
+        </ion-item>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

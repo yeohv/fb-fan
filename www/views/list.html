@@ -1,0 +1,29 @@
+<ion-view title="{{title}}" >
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input class="color-background" type="search" ng-model="query" ng-click="clickSearch()" placeholder="Search">
+    </label>
+  </div>
+  <ion-content class="has-header has-subheader">
+    <div collection-repeat="item in items|orderBy:'-item.created_time'">
+      <div class="list menu-list">
+        <div class="col col-3 post-item item-icon-left">
+        <a class="border" ng-click='show(item.link)'>
+        <div class="col col-7">
+          <p><small>{{item.created}}</small></p>
+          <img class="post-picture" ng-src="{{item.picture}}">
+          <h4 class="post"><strong>{{item.description| limitTo:50}}{{item.description.length > 50 ? '...' : ''}}</strong></h4>
+          <h6 class="post"><small><em>{{item.message| limitTo:50}}{{item.message.length > 50 ? '...' : ''}}</small></em></h6>
+          <h6 class="post"><small><em>{{item.created_time|limitTo:10}}</small></em></h6>
+        </a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

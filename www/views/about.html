@@ -1,0 +1,18 @@
+<ion-view title="{{title}}" >
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="toggleSearch()"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <img class="about-p" ng-src="{{about.cover.source}}"></img>
+    <h3 class="about">{{about.name}}</h3>
+    <h6>{{about.description}}</h6>
+    <h6 class="about">{{about.about}}</h6>
+    <p class="about"> <i class="icon2 ion-thumbsup"></i>{{about.likes}}</p>
+    <div class="item item-divider"> Contact</div>
+    <a><h6 class="about"><i class="icon2 ion-home"></i>{{about.website}}</h6></a>
+    <a><h6 class="about"><i class="icon2 ion-iphone"></i>{{about.phone}}{{about.phone>0?'':'None'}}</h6></a>
+    <a><h6 class="about"><i class="icon2 ion-location"></i>{{about.location.street}}{{about.location.street.length>0?', ':''}}{{about.location.city}}{{about.location.city.length>0?' ':''}}{{about.location.zip}}{{about.location.street.length>0?'':'None'}}</h6></a>
+    <a><h6 class="about"><i class="icon2 ion-social-facebook left"></i>{{about.link}}</h6></a>
+
+  </ion-content>
+</ion-view>
