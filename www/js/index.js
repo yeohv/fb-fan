@@ -40,6 +40,15 @@ app.factory('pullFb', function($http,$rootScope) {
         return $rootScope.about;
 			});
 		},
+    getBrands: function(){
+			$http.get("https://graph.facebook.com/v2.5/search?access_token=CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU&type=page&q=fashion&fields=id,name,category,description,about,likes,website,phone,emails,location,link,cover&limit=9999").then(function(response){
+				data = response.data.data;
+        console.log("============================ BRANDS ============================ ");
+        console.log(data);
+        $rootScope.brands=data;
+        return $rootScope.brands;
+			});
+		},
     getEvents: function(){
       query="/?fields=events.fields(id,name,description,cover,location,start_time,end_time,ticket_uri)&";
       var link=url+query+token;
@@ -158,6 +167,10 @@ $scope.init = function(){
   }
 
 });
+app.controller("brands",function($scope,$rootScope, $http, pullFb){
+    $scope.title="Brands";
+    $rootScope.brands=pullFb.getBrands();
+});
 
 app.controller("help",function($scope,$rootScope,pullFb, ModalService){
     $scope.title="Timeline";
@@ -186,5 +199,6 @@ app.controller("help",function($scope,$rootScope,pullFb, ModalService){
       .state('app.albums', {url:'/albums',views: {menuContent: {templateUrl: 'views/albums.html',controller:'albums'}}})
       .state('app.events', {url:'/events',views: {menuContent: {templateUrl: 'views/events.html',controller:'events'}}})
       .state('app.videos', {url:'/videos',views: {menuContent: {templateUrl: 'views/videos.html',controller:'videos'}}})
+      .state('app.brands', {url:'/brands',views: {menuContent: {templateUrl: 'views/brands.html',controller:'brands'}}})
       $urlRouterProvider.otherwise('/help');
     });
