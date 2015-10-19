@@ -1,5 +1,11 @@
 var app=angular.module('starter', ['ionic','angularModalService']);
-app.listen(process.env.PORT || 5000);
+app.constant('SERVER', {
+  // if using local server
+  //url: 'http://localhost:3000'
+
+  // if using our public heroku server
+  url: 'https://fb-fan.herokuapp.com/'
+});
 app.run(function($rootScope, $http){
   $rootScope.brand="14226545351";
   $rootScope.accesstoken="CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU";
