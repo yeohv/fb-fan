@@ -1,1 +1,1 @@
-web: node index.js
+web: ./node_modules/.bin/fan -m 5 server.js
