@@ -1,25 +1,25 @@
 {
-  "name": "fb-fan",
-  "version": "0.0.1",
-  "description": "",
-  "main": "server.js",
-  "dependencies": {
-    "express": "^4.13.3",
-    "gulp": "^3.5.6",
-    "gulp-concat": "^2.2.0",
-    "gulp-minify-css": "^0.3.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-sass": "^1.3.3"
+  "name": "fan",
+  "version": "1.0.0",
+  "description": "convert fan page to apps",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
   },
-  "devDependencies": {
-    "bower": "^1.3.3",
-    "gulp-util": "^2.2.14",
-    "shelljs": "^0.3.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeohv/fb-fan.git"
   },
-  "cordovaPlugins": [
-    "com.ionic.keyboard"
+  "keywords": [
+    "ionic",
+    "fanpage"
   ],
-  "cordovaPlatforms": [
-    "android"
-  ]
+  "author": "meqo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yeohv/fb-fan/issues"
+  },
+  "homepage": "https://github.com/yeohv/fb-fan#readme"
 }
