@@ -1,7 +1,8 @@
 {
-  "name": "Fanpage",
-  "version": "1.0.0",
-  "description": "Fanpage: An Ionic project",
+  "name": "fb-fan",
+    "version": "0.0.1",
+    "description": "",
+    "main": "server.js",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^1.3.3",
