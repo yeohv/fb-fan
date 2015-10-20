@@ -1,16 +1,12 @@
 var app=angular.module('starter', ['ionic','angularModalService']);
 
-app.run(function($rootScope, $http,$stateParams,$ionicLoading){
-  $ionicLoading.show({
-    template: '<ion-spinner icon="spiral"></ion-spinner>',
-  })
+app.run(function($rootScope){
   $rootScope.accesstoken="CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU";
 
 });
 
 app.factory('pullFb', function($http,$rootScope,$ionicLoading) {
   //$rootScope.brand="14226545351";
-
 	var url= "https://graph.facebook.com/v2.3/";
   var token="access_token="+$rootScope.accesstoken;
   var query="";
@@ -190,7 +186,7 @@ app.controller("brands",function($scope,$rootScope, $http, pullFb){
 
 });
 
-app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService,$ionicLoading,$ionicSideMenuDelegate){
+app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService,$ionicSideMenuDelegate){
     $scope.init = function(){
       $ionicSideMenuDelegate.toggleLeft();
       console.log("help");
@@ -224,9 +220,16 @@ app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, Modal
   $scope.link = $sce.trustAsResourceUrl(link);
 });
 
+app.controller("menu",function($ionicLoading){
+  $ionicLoading.show({
+    template: '<ion-spinner icon="spiral"></ion-spinner>',
+  })
+
+});
+
 
   app.config(function($stateProvider, $urlRouterProvider) {
-      $stateProvider.state('app', {url: '',abstract: true,templateUrl: 'views/menu.html'})
+      $stateProvider.state('app', {url: '',abstract: true,templateUrl: 'views/menu.html',controller:'menu'})
       .state('load',{url:'/demo/:id',templateUrl: 'views/load-brand.html',controller:'load'})
       .state('app.help',{url:'/app/:id',views:{menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
       .state('app.product', {url:'/app/:id/product',views: {menuContent: {templateUrl: 'views/product.html',controller:'product'}}})
