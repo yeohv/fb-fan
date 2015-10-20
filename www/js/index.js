@@ -103,7 +103,7 @@ app.factory('pullFb', function($http,$rootScope,$ionicLoading) {
 });
 
 app.controller("product",function($scope,$rootScope,$ionicSideMenuDelegate){
-    $ionicSideMenuDelegate.toggleLeft();
+    $ionicSideMenuDelegate.toggleRight();
     $scope.title="Product";
     $scope.products=[
       {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Striped Top",price:"$20.50"},
@@ -119,7 +119,7 @@ app.controller("product",function($scope,$rootScope,$ionicSideMenuDelegate){
 });
 
 app.controller("deals",function($scope,$rootScope,$ionicSideMenuDelegate){
-    $ionicSideMenuDelegate.toggleLeft();
+    $ionicSideMenuDelegate.toggleRight();
     $scope.title="Promotions";
     $scope.promotions=[
       {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Check out our newest items on Sale",title:"The Big Summer Promotion"},
@@ -130,13 +130,13 @@ app.controller("deals",function($scope,$rootScope,$ionicSideMenuDelegate){
 });
 
 app.controller("about",function($scope,$rootScope, $http, pullFb,$ionicSideMenuDelegate){
-    $ionicSideMenuDelegate.toggleLeft();
+    $ionicSideMenuDelegate.toggleRight();
     $scope.title="About us";
     $rootScope.about=pullFb.getAbout();
 });
 
 app.controller("events",function($scope,$rootScope, $http, pullFb,ModalService,$ionicSideMenuDelegate){
-    $ionicSideMenuDelegate.toggleLeft();
+    $ionicSideMenuDelegate.toggleRight();
     $scope.title="Events";
     $rootScope.events=pullFb.getEvents();
     $scope.show = function(src) {
@@ -150,7 +150,7 @@ app.controller("events",function($scope,$rootScope, $http, pullFb,ModalService,$
 });
 
 app.controller("videos",function($scope,$rootScope, $http, pullFb, ModalService,$ionicSideMenuDelegate){
-    $ionicSideMenuDelegate.toggleLeft();
+    $ionicSideMenuDelegate.toggleRight();
     $scope.title="Videos";
     $rootScope.videos=pullFb.getVideos();
     $scope.show = function(src) {
@@ -175,7 +175,7 @@ console.log($scope.play);
 
 
 app.controller("albums",function($scope,$rootScope, $http, pullFb,$ionicSideMenuDelegate){
-  $ionicSideMenuDelegate.toggleLeft();
+  $ionicSideMenuDelegate.toggleRight();
     $scope.title="Photos";
 $scope.init = function(){
      $rootScope.photos=pullFb.getPhotos();
@@ -191,11 +191,12 @@ app.controller("brands",function($scope,$rootScope, $http, pullFb){
       $rootScope.brands=pullFb.getBrands(query);
       console.log($rootScope.brands);
     }
+
 });
 
 app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService,$ionicSideMenuDelegate){
     $scope.init = function(){
-      $ionicSideMenuDelegate.toggleLeft();
+      $ionicSideMenuDelegate.toggleRight();
       console.log("help");
       console.log($stateParams.id);
       $rootScope.id=$stateParams.id;
