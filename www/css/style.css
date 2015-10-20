@@ -44,7 +44,7 @@ text-decoration:none !important;
   padding-right: 10px;
 }
 .icon2{
-  color:#3CB7CC;
+  color:#444;
   font-size:20px;
   padding-right: 10px;
   text-align: left;
@@ -140,6 +140,9 @@ display:block;
 }
 .color1{
   right:200px;
+}
+.tab-item{
+  text-align: left;
 }
 
 .about{

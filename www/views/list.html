@@ -6,11 +6,11 @@
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-ios-search placeholder-icon"></i>
-      <input class="color-background" type="search" ng-model="query" ng-click="clickSearch()" placeholder="Search">
+      <input class="color-background" type="search" ng-model="query" placeholder="Search">
     </label>
   </div>
-  <ion-content class="has-header has-subheader">
-    <div collection-repeat="item in items|orderBy:'-item.created_time'">
+  <ion-content class="has-header has-subheader" ng-init="init()">
+    <div collection-repeat="item in items|orderBy:'-item.created_time' | filter:query">
       <div class="list menu-list">
         <div class="col col-3 post-item item-icon-left">
         <a class="border" ng-click='show(item.link)'>

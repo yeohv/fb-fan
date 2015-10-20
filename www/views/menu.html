@@ -13,14 +13,14 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-          <ion-item class="menu-item"href='#/app/'+{{id}}><i class="icon1 ion-star" ng-class="cat.icon"></i> Timeline</ion-item>
-          <ion-item class="menu-item" href="#/albums"><i class="icon1 ion-camera" ng-class="cat.icon"> </i> Photos</ion-item>
-          <ion-item class="menu-item" href="#/events"><i class="icon1 ion-calendar" ng-class="cat.icon"></i> Events</ion-item>
-          <ion-item class="menu-item" href="#/videos"><i class="icon1 ion-videocamera" ng-class="cat.icon"> </i> Videos</ion-item>
-          <ion-item class="menu-item"href="#/product"><i class="icon1 ion-bag" ng-class="cat.icon"></i> Shop</ion-item>
-          <ion-item class="menu-item" href="#/deals"><i class="icon1 ion-pricetags" ng-class="cat.icon"> </i> Promotions</ion-item>
+          <ion-item class="menu-item" ng-href='#/app/{{id}}'><i class="icon1 ion-star" ng-class="cat.icon"></i> Timeline</ion-item>
+          <ion-item class="menu-item" ng-href="#/app/{{id}}/albums"><i class="icon1 ion-camera" ng-class="cat.icon"> </i> Photos</ion-item>
+          <ion-item class="menu-item" ng-href="#/app/{{id}}/events"><i class="icon1 ion-calendar" ng-class="cat.icon"></i> Events</ion-item>
+          <ion-item class="menu-item" ng-href="#/app/{{id}}/videos"><i class="icon1 ion-videocamera" ng-class="cat.icon"> </i> Videos</ion-item>
+          <ion-item class="menu-item" ng-href="#/app/{{id}}/product"><i class="icon1 ion-bag" ng-class="cat.icon"></i> Shop</ion-item>
+          <ion-item class="menu-item" ng-href="#/app/{{id}}/deals"><i class="icon1 ion-pricetags" ng-class="cat.icon"> </i> Promotions</ion-item>
             <div class="item item-divider"> More Information</div>
-          <ion-item class="menu-item" href="#/about"><i class="icon1 ion-information-circled" ng-class="cat.icon"></i> About us</ion-item>
+          <ion-item class="menu-item" ng-href="#/app/{{id}}/about"><i class="icon1 ion-information-circled" ng-class="cat.icon"></i> About us</ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
