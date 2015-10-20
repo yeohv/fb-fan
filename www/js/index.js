@@ -1,25 +1,25 @@
 var app=angular.module('starter', ['ionic','angularModalService']);
 
-app.run(function($rootScope, $http){
-  $rootScope.brand="14226545351";
+app.run(function($rootScope, $http,$stateParams){
   $rootScope.accesstoken="CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU";
 
 });
 
-
 app.factory('pullFb', function($http,$rootScope) {
-	var url= "https://graph.facebook.com/v2.3/"+$rootScope.brand;
+  //$rootScope.brand="14226545351";
+
+	var url= "https://graph.facebook.com/v2.3/";
   var token="access_token="+$rootScope.accesstoken;
   var query="";
   var photos=[];
 
 	return {
 		getPosts: function(){
-
+      console.log("getPosts:"+$rootScope.brand);
       query="/?fields=posts.fields(name,link,source,description,place,created_time,message, picture)&";
-      var link=url+query+token;
+      var link=url+$rootScope.brand+query+token;
       console.log(link);
-			$http.get(url+query+token).then(function(response){
+			$http.get(link).then(function(response){
         myData=response.data.posts.data;
         console.log("============================ POSTS ============================ ");
         console.log(myData);
@@ -29,7 +29,7 @@ app.factory('pullFb', function($http,$rootScope) {
 		},
     getAbout: function(){
       query="/?fields=id,name,description,about,likes,website,phone,location,link,cover&";
-      var link=url+query+token;
+      var link=url+$rootScope.brand+query+token;
       console.log(link);
 			$http.get(link).then(function(response){
 				data = response.data;
@@ -50,9 +50,9 @@ app.factory('pullFb', function($http,$rootScope) {
 		},
     getEvents: function(){
       query="/?fields=events.fields(id,name,description,cover,location,start_time,end_time,ticket_uri)&";
-      var link=url+query+token;
-      console.log(link);
-      $http.get(url+"/?fields=events.fields(id,name,description,cover,location,start_time,end_time,ticket_uri)&"+token).then(function(response){
+      var link=url+$rootScope.brand;
+        console.log($rootScope.brand);
+      $http.get(url+$rootScope.brand+"/?fields=events.fields(id,name,description,cover,location,start_time,end_time,ticket_uri)&"+token).then(function(response){
         data = response.data.events.data;
         console.log("============================ EVENTs ============================ ");
         console.log(data);
@@ -62,7 +62,7 @@ app.factory('pullFb', function($http,$rootScope) {
     },
     getVideos: function(){
       query="?fields=videos.fields(id,name,description,updated_time,picture,source)&"
-      var link=url+query+token;
+      var link=url+$rootScope.brand+query+token;
       console.log(link);
       $http.get(link).then(function(response){
         data=response.data.videos.data;
@@ -74,7 +74,7 @@ app.factory('pullFb', function($http,$rootScope) {
     },
 		getPhotos: function(id){
       query="?fields=albums.fields(id,name,cover_photo,photos.fields(name,picture,source,place,name_tags,created_time))&";
-      var link=url+query+token;
+    var link=url+$rootScope.brand+query+token;
       console.log(link);
 
       $http.get(link).then(function(response){
@@ -134,6 +134,7 @@ app.controller("events",function($scope,$rootScope, $http, pullFb,ModalService){
 
 app.controller("videos",function($scope,$rootScope, $http, pullFb, ModalService){
     $scope.title="Videos";
+    $rootScope.videos=pullFb.getVideos();
     $scope.init = function(){
          $rootScope.videos=pullFb.getVideos();
       };
@@ -169,9 +170,15 @@ $scope.init = function(){
 app.controller("brands",function($scope,$rootScope, $http, pullFb){
     $scope.title="Brands";
     $rootScope.brands=pullFb.getBrands();
+
 });
 
-app.controller("help",function($scope,$rootScope,pullFb, ModalService){
+app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService){
+  console.log("help");
+  console.log($stateParams.id);
+  $rootScope.id=$stateParams.id;
+  $rootScope.brand=$rootScope.id;
+  console.log("brand: "+$rootScope.brand);
     $scope.title="Timeline";
     $rootScope.items=pullFb.getPosts();
     $scope.toggleSearch = function(){
@@ -188,11 +195,20 @@ app.controller("help",function($scope,$rootScope,pullFb, ModalService){
        });
    };
 });
+app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, ModalService){
+  console.log($stateParams.id);
+  $rootScope.brand=$stateParams.id;
+  console.log("load");
+  var link="https://fb-fan.herokuapp.com/#/app/"+$stateParams.id;
+  console.log(link);
+  $scope.link = $sce.trustAsResourceUrl(link);
+});
 
 
   app.config(function($stateProvider, $urlRouterProvider) {
       $stateProvider.state('app', {url: '',abstract: true,templateUrl: 'views/menu.html'})
-      .state('app.help', {url:'/help',views: {menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
+      .state('load',{url:'/demo/:id',templateUrl: 'views/load-brand.html',controller:'load'})
+      .state('app.help',{url:'/app/:id',views:{menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
       .state('app.product', {url:'/product',views: {menuContent: {templateUrl: 'views/product.html',controller:'product'}}})
       .state('app.about', {url:'/about',views: {menuContent: {templateUrl: 'views/about.html',controller:'about'}}})
       .state('app.albums', {url:'/albums',views: {menuContent: {templateUrl: 'views/albums.html',controller:'albums'}}})

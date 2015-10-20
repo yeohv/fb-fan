@@ -17,9 +17,9 @@ text-decoration:none !important;
 .close{
   width:100%;
 }
-.window{
-  border:1px solid black;
 
+iframe{
+  padding-left: 25px;
 }
 .text{
   height:100%;
@@ -142,4 +142,8 @@ display:block;
 }
 .video-p{
   width:100px;
+}
+.brandslist{
+  text-align: left;
+  padding-left:20px;
 }
