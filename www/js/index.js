@@ -40,13 +40,15 @@ app.factory('pullFb', function($http,$rootScope,$ionicLoading) {
         return $rootScope.about;
 			});
 		},
-    getBrands: function(){
-			$http.get("https://graph.facebook.com/v2.5/search?access_token=CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU&type=page&q=fashion&fields=id,name,category,description,about,likes,website,phone,emails,location,link,cover&limit=9999").then(function(response){
+    getBrands: function(query){
+      console.log("query here");
+      console.log(query);
+			$http.get("https://graph.facebook.com/v2.5/search?access_token=CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU&type=page&q="+query+"&fields=id,name,category,description,about,likes,website,phone,emails,location,link,cover&limit=9999").then(function(response){
 				data = response.data.data;
         //console.log("============================ BRANDS ============================ ");
-      //  console.log(data);
+        console.log(data);
         $rootScope.brands=data;
-          $ionicLoading.hide();
+        $ionicLoading.hide();
         return $rootScope.brands;
 			});
 		},
@@ -181,9 +183,14 @@ $scope.init = function(){
 
 });
 app.controller("brands",function($scope,$rootScope, $http, pullFb){
-    $scope.title="Brands";
-    $rootScope.brands=pullFb.getBrands();
-
+    console.log("brands");
+    $scope.init = function(){
+      $scope.title="Brands";
+    }
+    $scope.search=function(query){
+      $rootScope.brands=pullFb.getBrands(query);
+      console.log($rootScope.brands);
+    }
 });
 
 app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService,$ionicSideMenuDelegate){
@@ -230,6 +237,7 @@ app.controller("menu",function($ionicLoading){
   app.config(function($stateProvider, $urlRouterProvider) {
       $stateProvider.state('app', {url: '',abstract: true,templateUrl: 'views/menu.html',controller:'menu'})
       .state('load',{url:'/demo/:id',templateUrl: 'views/load-brand.html',controller:'load'})
+      .state('brands', {url:'/brands',templateUrl: 'views/brands.html',controller:'brands'})
       .state('app.help',{url:'/app/:id',views:{menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
       .state('app.product', {url:'/app/:id/product',views: {menuContent: {templateUrl: 'views/product.html',controller:'product'}}})
       .state('app.deals', {url:'/app/:id/deals',views: {menuContent: {templateUrl: 'views/deals.html',controller:'deals'}}})
@@ -237,7 +245,6 @@ app.controller("menu",function($ionicLoading){
       .state('app.albums', {url:'/app/:id/albums',views: {menuContent: {templateUrl: 'views/albums.html',controller:'albums'}}})
       .state('app.events', {url:'/app/:id/events',views: {menuContent: {templateUrl: 'views/events.html',controller:'events'}}})
       .state('app.videos', {url:'/app/:id/videos',views: {menuContent: {templateUrl: 'views/videos.html',controller:'videos'}}})
-      .state('brands', {url:'/brands',templateUrl: 'views/brands.html',controller:'brands'})
       .state('error',{url:'/error',templateUrl: 'views/error.html'})
       $urlRouterProvider.otherwise('/error');
     });

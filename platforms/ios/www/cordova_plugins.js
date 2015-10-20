@@ -29,13 +29,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
         "id": "cordova-plugin-inappbrowser.inappbrowser",
         "clobbers": [
@@ -50,7 +43,6 @@ module.exports.metadata =
     "com.ionic.keyboard": "1.0.4",
     "cordova-plugin-console": "1.0.1",
     "cordova-plugin-device": "1.0.1",
-    "cordova-plugin-splashscreen": "2.1.0",
     "cordova-plugin-inappbrowser": "1.0.2-dev"
 }
 // BOTTOM OF METADATA

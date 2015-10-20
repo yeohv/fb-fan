@@ -43,8 +43,6 @@
 		6F412B68A19248C4B9AD1BA2 /* UIWebViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 962DBF6546AE43ACA3A9DACD /* UIWebViewExtension.m */; };
 		19CF6410B65E4104824DF725 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF9D09D4B94B3CB52C525E /* CDVLogger.m */; };
 		2FECAA2E88074B3988176A5D /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 27176E4C6C4542FCB1F6303A /* CDVDevice.m */; };
-		C494ED51EAB54EBEB0106B46 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9106376E472180081804 /* CDVSplashScreen.m */; };
-		D92E9C3CF22B4647B3091A02 /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = A87E0067738245B4B120FD2A /* CDVViewController+SplashScreen.m */; };
 		2527490CEC42404287CF4BD0 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C216769FF14BA8BE48E7C1 /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
@@ -119,10 +117,6 @@
 		6779D071FB594ADCB977877D /* CDVLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLogger.h"; path = "cordova-plugin-console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		27176E4C6C4542FCB1F6303A /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		AFA48A3EACB64DB99A646B62 /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		49EE9106376E472180081804 /* CDVSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSplashScreen.m"; path = "cordova-plugin-splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		A87E0067738245B4B120FD2A /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		C621164D1FB4484495D86826 /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		CB43DD8D5B5040D9A70A414F /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		80C216769FF14BA8BE48E7C1 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		D14F7F061AAE4C7882271689 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
@@ -231,10 +225,6 @@
 				6779D071FB594ADCB977877D /* CDVLogger.h */,
 				27176E4C6C4542FCB1F6303A /* CDVDevice.m */,
 				AFA48A3EACB64DB99A646B62 /* CDVDevice.h */,
-				49EE9106376E472180081804 /* CDVSplashScreen.m */,
-				A87E0067738245B4B120FD2A /* CDVViewController+SplashScreen.m */,
-				C621164D1FB4484495D86826 /* CDVSplashScreen.h */,
-				CB43DD8D5B5040D9A70A414F /* CDVViewController+SplashScreen.h */,
 				80C216769FF14BA8BE48E7C1 /* CDVInAppBrowser.m */,
 				D14F7F061AAE4C7882271689 /* CDVInAppBrowser.h */,
 			);
@@ -425,8 +415,6 @@
 				6F412B68A19248C4B9AD1BA2 /* UIWebViewExtension.m in Sources */,
 				19CF6410B65E4104824DF725 /* CDVLogger.m in Sources */,
 				2FECAA2E88074B3988176A5D /* CDVDevice.m in Sources */,
-				C494ED51EAB54EBEB0106B46 /* CDVSplashScreen.m in Sources */,
-				D92E9C3CF22B4647B3091A02 /* CDVViewController+SplashScreen.m in Sources */,
 				2527490CEC42404287CF4BD0 /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
