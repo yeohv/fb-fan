@@ -145,7 +145,7 @@ display:block;
 .color-p{
   font-size: 10px;
   text-align:left;
-  left:300px;
+  padding-left: 120px;
 }
 .tab-item{
   text-align: left;
