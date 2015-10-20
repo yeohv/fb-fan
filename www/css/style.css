@@ -179,3 +179,12 @@ display:block;
 .function-card{
   font-size: 12px;
 }
+.spinner svg {
+  width: 64px;
+  height: 64px;
+  stroke: #FFF;
+  fill: #FFF;
+}
+.center{
+  text-align:center !important;
+}

@@ -5,7 +5,7 @@ app.run(function($rootScope, $http,$stateParams){
 
 });
 
-app.factory('pullFb', function($http,$rootScope) {
+app.factory('pullFb', function($http,$rootScope,$ionicLoading) {
   //$rootScope.brand="14226545351";
 
 	var url= "https://graph.facebook.com/v2.3/";
@@ -24,6 +24,7 @@ app.factory('pullFb', function($http,$rootScope) {
         console.log("============================ POSTS ============================ ");
         console.log(myData);
        $rootScope.items = myData;
+        $ionicLoading.hide();
        return $rootScope.items;
 			});
 		},
@@ -171,7 +172,8 @@ console.log($scope.play);
 });
 
 
-app.controller("albums",function($scope,$rootScope, $http, pullFb){
+app.controller("albums",function($scope,$rootScope, $http, pullFb,$ionicSideMenuDelegate){
+  $ionicSideMenuDelegate.toggleLeft();
     $scope.title="Photos";
 $scope.init = function(){
      $rootScope.photos=pullFb.getPhotos();
@@ -184,7 +186,11 @@ app.controller("brands",function($scope,$rootScope, $http, pullFb){
 
 });
 
-app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService){
+app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService,$ionicLoading){
+  $ionicLoading.show({
+    template: '<ion-spinner icon="spiral"></ion-spinner>',
+
+  })
   console.log("help");
   console.log($stateParams.id);
   $rootScope.id=$stateParams.id;
@@ -221,7 +227,7 @@ app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, Modal
       .state('load',{url:'/demo/:id',templateUrl: 'views/load-brand.html',controller:'load'})
       .state('app.help',{url:'/app/:id',views:{menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
       .state('app.product', {url:'/product',views: {menuContent: {templateUrl: 'views/product.html',controller:'product'}}})
-      .state('app.promotions', {url:'/promotions',views: {menuContent: {templateUrl: 'views/deals.html',controller:'deals'}}})
+      .state('app.promotions', {url:'/promotions',views: {menuContent: {templateUrl: 'views/deals.html',controller:'product'}}})
       .state('app.about', {url:'/about',views: {menuContent: {templateUrl: 'views/about.html',controller:'about'}}})
       .state('app.albums', {url:'/albums',views: {menuContent: {templateUrl: 'views/albums.html',controller:'albums'}}})
       .state('app.events', {url:'/events',views: {menuContent: {templateUrl: 'views/events.html',controller:'events'}}})
