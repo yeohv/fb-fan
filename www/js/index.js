@@ -202,7 +202,6 @@ app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalServi
     };
 
     $scope.show = function(src) {
-
       $rootScope.src=src;
       console.log(src);
        ModalService.showModal({
@@ -238,7 +237,7 @@ app.controller("menu",function($ionicLoading){
       .state('app.albums', {url:'/app/:id/albums',views: {menuContent: {templateUrl: 'views/albums.html',controller:'albums'}}})
       .state('app.events', {url:'/app/:id/events',views: {menuContent: {templateUrl: 'views/events.html',controller:'events'}}})
       .state('app.videos', {url:'/app/:id/videos',views: {menuContent: {templateUrl: 'views/videos.html',controller:'videos'}}})
-      .state('app.brands', {url:'/brands',views: {menuContent: {templateUrl: 'views/brands.html',controller:'brands'}}})
+      .state('brands', {url:'/brands',templateUrl: 'views/brands.html',controller:'brands'})
       .state('error',{url:'/error',templateUrl: 'views/error.html'})
       $urlRouterProvider.otherwise('/error');
     });
