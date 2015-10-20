@@ -142,6 +142,11 @@ display:block;
   right:200px;
   font-size: 15px;
 }
+.color-p{
+  font-size: 10px;
+  text-align:left;
+  right:300px;
+}
 .tab-item{
   text-align: left;
 }
