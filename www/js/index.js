@@ -98,20 +98,31 @@ app.factory('pullFb', function($http,$rootScope) {
 app.controller("product",function($scope,$rootScope){
     $scope.title="Product";
     $scope.products=[
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/6021-70918-large/lb-basics-dagny-striped-top.jpg",descr:"",title:"Striped Top",price:"$20.50"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/5920-69584-home/lb-basics-tavis-tee.jpg",descr:"",title:"Basics Tavis Tee",price:"$18.00"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/5916-69424-home/lb-basics-lanza-striped-top.jpg",descr:"",title:"Basics Lanza Striped Top",price:"$19.00"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/4305-49420-home/tasmin-tube.jpg",descr:"",title:"Tasmin Tube",price:"$40.00"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/6143-72323-home/covet-ravyn-tube-playsuit.jpg",descr:"",title:"Ravyn Tube Playsuit",price:"$50.00"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/6098-71838-home/covet-mireille-slit-maxi-skirt.jpg",descr:"",title:"Mireille Slit Maxi Skirt",price:"$19.00"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/6090-71792-home/-covet-taelyn-embellished-collar-top.jpg",descr:"",title:"Embillished Collar Top",price:"$23.00"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/6073-71602-home/covet-pedrine-pants.jpg",descr:"",title:"Covet Pedrine Pants",price:"$36.00"},
-      {src:"http://www.lovebonito.com.global.prod.fastly.net/6030-71003-home/covet-basha-belted-playsuit.jpg",descr:"",title:"Covet Basha Belted Playsuit",price:"$43.00"}
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Striped Top",price:"$20.50"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Basics Tavis Tee",price:"$18.00"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Basics Lanza Striped Top",price:"$19.00"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Tasmin Tube",price:"$40.00"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Ravyn Tube Playsuit",price:"$50.00"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Mireille Slit Maxi Skirt",price:"$19.00"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Embillished Collar Top",price:"$23.00"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Covet Pedrine Pants",price:"$36.00"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"",title:"Covet Basha Belted Playsuit",price:"$43.00"}
     ];
 
 
 });
 
+app.controller("deals",function($scope,$rootScope){
+    $scope.title="Promotions";
+    $scope.promotions=[
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Check out our newest items on Sale",title:"The Big Summer Promotion"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"10% off Selected Items",title:"The Big Summer Promotion"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Buy one get one free",title:"The Big Summer Promotion"},
+      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Check out our newest items on Sale",title:"The Big Summer Promotion"},
+    ];
+
+
+});
 
 app.controller("about",function($scope,$rootScope, $http, pullFb){
     $scope.title="About us";
@@ -210,6 +221,7 @@ app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, Modal
       .state('load',{url:'/demo/:id',templateUrl: 'views/load-brand.html',controller:'load'})
       .state('app.help',{url:'/app/:id',views:{menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
       .state('app.product', {url:'/product',views: {menuContent: {templateUrl: 'views/product.html',controller:'product'}}})
+      .state('app.promotions', {url:'/promotions',views: {menuContent: {templateUrl: 'views/deals.html',controller:'deals'}}})
       .state('app.about', {url:'/about',views: {menuContent: {templateUrl: 'views/about.html',controller:'about'}}})
       .state('app.albums', {url:'/albums',views: {menuContent: {templateUrl: 'views/albums.html',controller:'albums'}}})
       .state('app.events', {url:'/events',views: {menuContent: {templateUrl: 'views/events.html',controller:'events'}}})

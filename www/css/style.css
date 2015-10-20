@@ -39,7 +39,7 @@ text-decoration:none !important;
   width:100%;
 }
 .icon1{
-  color:#4a87ee;
+  color:#444;
   font-size: 20px;
   padding-right: 10px;
 }
@@ -57,7 +57,7 @@ text-decoration:none !important;
   padding: 0;
   text-decoration: none;
   height:120px;
-  border-bottom:1px solid #4a87ee;
+  border-bottom:1px solid #444;
 }
 .menu-item{
   text-align: left;
@@ -135,7 +135,7 @@ display:block;
 
 .src{
   width:100%;
-  background-color: #4a87ee;
+  background-color: #444;
 
 }
 .color1{
