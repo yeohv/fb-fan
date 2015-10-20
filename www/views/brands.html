@@ -6,7 +6,7 @@
     </label>
   </div>
   <ion-content class="has-header" ng-init="init()">
-    <div collection-repeat="brand in brands">
+    <div collection-repeat="brand in brands|orderBy:-brand.likes">
       <div class="list">
         <a class="item-thumbnail-left">
           <h2 class="color1"><span class="highlight">#{{$index + 1}} </span>- {{brand.name}}</h2>

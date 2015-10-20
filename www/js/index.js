@@ -192,6 +192,10 @@ app.controller("brands",function($scope,$rootScope, $http, pullFb){
       console.log($rootScope.brands);
     }
 
+    $scope.send=function(){
+      
+    }
+
 });
 
 app.controller("help",function($scope,$rootScope,$stateParams,pullFb, ModalService,$ionicSideMenuDelegate){
