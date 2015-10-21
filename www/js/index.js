@@ -794,7 +794,7 @@ app.controller("help",function($scope,$rootScope,$ionicLoading,pullFb, ModalServ
    };
 });
 
-app.controller("load",function($scope,$rootScope,$sce,pullFb, ModalService){
+app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, ModalService){
   var link="https://fb-fan.herokuapp.com/#/app/"+$stateParams.id;
   $scope.link = $sce.trustAsResourceUrl(link);
   $rootScope.about=pullFb.getAbout();
