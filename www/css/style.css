@@ -83,6 +83,8 @@ text-decoration:none !important;
   color:white !important;
   border:0;
 }
+
+
 .test3 .menu-content{
   background-color:rgba(255,255,255,0.05) !important;
   border:0;
@@ -93,20 +95,23 @@ text-decoration:none !important;
   -webkit-filter: grayscale(50%);
 }
 .test3 .menu-content .menu-list{
+  background:none !important;
   position: fixed;
   top:80px;
   left:30px;
   text-align: left;
-}
 
+}
 
 .test3 .menu-content .menu-list ion-item{
-  background:none !important;
+  background: none !important;
   border:0;
+  margin:0;
 }
+
 .menu-content .menu-list .menu-item{
   font-family: 'Cabin', sans-serif;
-  background:none !important;
+  background-:none !important;
   text-align:left;
   border:0;
   font-size: 15px;
@@ -128,17 +133,6 @@ ion-header-bar .my-bar{
 
 }
 
-
-
-.menu-content .menu-list .item-divider{
-  background-color: rgba(255,255,255,0.1)!important;
-  color: black;
-  margin:0;
-  padding: 0;
-  text-align: left;
-  border:
-
-}
 
 .post-picture{
   float:left;
@@ -378,9 +372,12 @@ text-decoration: none;
 .date-post{
   text-align: left;
 }
+
+.menu-content .my-bar{
+  background:none !important;
+}
 .menu-content .mynavbar{
   background-color:#29223B !important;
-
 }
 .menu-content .mynavbar .ion-navicon{
   position: fixed;
@@ -396,11 +393,12 @@ text-decoration: none;
 
 .test3 .my-bar .bdg{
   position: fixed;
-  left:110px;
-  top:20px;
-  width: 50px;
-  height:50px;
+  left:107px;
+  top:10px;
+  width: 60px;
+  height:60px;
   border-radius: 50%;
+  border: 2px solid #29223B;
 }
 .test3 .my-bar .title{
   position: fixed;
@@ -437,12 +435,14 @@ right:0;
     z-index: 10;
     background-color: rgba(0,0,0,0.89);
 }
-.list{
+
+.modal-body-signup .list{
   float: left;
   text-align: left;
   background-color:white !important;
   width: 100%;
 }
+
 
 .modal .modal-content{
   position: fixed;
@@ -452,4 +452,7 @@ right:0;
   background-color:white !important;
   padding: 0;
 
+}
+.functions{
+  border: 0;
 }

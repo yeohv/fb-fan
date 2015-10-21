@@ -5,8 +5,8 @@ app.run(function($rootScope){
 
 });
 
-app.factory('pullFb', function($http,$rootScope,$ionicLoading,$sce) {
-  //$rootScope.brand="14226545351";
+app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce) {
+  $rootScope.brand=$stateParams.id;
 	var url= "https://graph.facebook.com/v2.3/";
   var token="access_token="+$rootScope.accesstoken;
   var query="";
@@ -28,15 +28,15 @@ app.factory('pullFb', function($http,$rootScope,$ionicLoading,$sce) {
 			});
 		},
     getAbout: function(){
-      query="/?fields=id,name,description,about,likes,website,phone,location,link,cover&";
+      query="/?fields=id,name,description,about,likes,website,phone,location,picture,link,cover&";
       var link=url+$rootScope.brand+query+token;
-      //console.log(link);
+      console.log(link);
 			$http.get(link).then(function(response){
 				data = response.data;
         //console.log("============================ ABOUT ============================ ");
         //console.log(data);
         $rootScope.about=data;
-          $ionicLoading.hide();
+          //$ionicLoading.hide();
         return $rootScope.about;
 			});
 		},
@@ -692,7 +692,7 @@ app.controller("product",function($scope,$rootScope){
     ];
 });
 
-app.controller("deals",function($scope,$rootScope){
+app.controller("deals",function($scope){
 
     $scope.title="Promotions";
     $scope.promotions=[
@@ -703,21 +703,16 @@ app.controller("deals",function($scope,$rootScope){
     ];
 });
 
-app.controller("about",function($scope,$rootScope, $http, pullFb){
-
+app.controller("about",function($scope,$rootScope, pullFb){
     $scope.title="About us";
     $rootScope.about=pullFb.getAbout();
 });
 
-app.controller("events",function($scope,$rootScope, $stateParams,$http, pullFb,ModalService){
-  console.log($stateParams.id);
-  $rootScope.id=$stateParams.id;
-  $rootScope.brand=$rootScope.id;
+app.controller("events",function($scope,$rootScope,pullFb,ModalService){
     $scope.title="Events";
     $rootScope.events=pullFb.getEvents();
     $scope.show = function(src) {
       $rootScope.src=src;
-      console.log(src);
        ModalService.showModal({
            templateUrl: 'views/template.html',
            controller: "ModalController",
@@ -725,10 +720,7 @@ app.controller("events",function($scope,$rootScope, $stateParams,$http, pullFb,M
    };
 });
 
-app.controller("videos",function($scope,$rootScope, $http, $stateParams,pullFb,$sce, ModalService){
-  console.log($stateParams.id);
-  $rootScope.id=$stateParams.id;
-  $rootScope.brand=$rootScope.id;
+app.controller("videos",function($scope,$rootScope,pullFb,$sce, ModalService){
     $scope.title="Videos";
     $rootScope.videos=pullFb.getVideos();
 
@@ -743,7 +735,7 @@ app.controller("videos",function($scope,$rootScope, $http, $stateParams,pullFb,$
 
 });
 
-app.controller('ModalController', function($scope, close, $stateParams,$rootScope,$sce) {
+app.controller('ModalController', function($scope, close,$rootScope,$sce) {
 $scope.play = $sce.trustAsResourceUrl($rootScope.src);
 console.log($scope.play);
  $scope.close = function(result) {
@@ -751,9 +743,7 @@ console.log($scope.play);
  };
 
  $scope.send=function(user,email,tel){
-  console.log($stateParams.id);
-   $rootScope.id=$stateParams.id;
-   console.log($rootScope.id);
+   console.log($rootScope.brand);
    console.log(user + email+tel);
    //save it and put it up
    this.close('yes');
@@ -762,19 +752,14 @@ console.log($scope.play);
 });
 
 
-app.controller("albums",function($scope,$rootScope,$stateParams,$http, pullFb){
-  console.log($stateParams.id);
-  $rootScope.id=$stateParams.id;
-  $rootScope.brand=$rootScope.id;
+app.controller("albums",function($scope,$rootScope,pullFb){
 $rootScope.photos=pullFb.getPhotos();
     $scope.title="Photos";
 $scope.init = function(){
-
      $rootScope.photos=pullFb.getPhotos();
   }
-
 });
-app.controller("brands",function($scope,$rootScope, $http, pullFb){
+app.controller("brands",function($scope,$rootScope,pullFb){
     console.log("brands");
     $scope.init = function(){
       $scope.title="Brands";
@@ -790,16 +775,11 @@ app.controller("brands",function($scope,$rootScope, $http, pullFb){
 
 });
 
-app.controller("help",function($scope,$rootScope,$stateParams,$ionicSideMenuDelegate,pullFb, ModalService){
+app.controller("help",function($scope,$rootScope,$ionicLoading,pullFb, ModalService){
     $scope.init = function(){
-      $ionicSideMenuDelegate.toggleLeft();
-      console.log("help");
-      console.log($stateParams.id);
-      $rootScope.id=$stateParams.id;
-      $rootScope.brand=$rootScope.id;
-      console.log("brand: "+$rootScope.brand);
         $scope.title="Timeline";
         $rootScope.items=pullFb.getPosts();
+
     };
     $scope.clickSearch = function(){
         $scope.query = "";
@@ -807,7 +787,6 @@ app.controller("help",function($scope,$rootScope,$stateParams,$ionicSideMenuDele
 
     $scope.show = function(src) {
       $rootScope.src=src;
-      console.log(src);
        ModalService.showModal({
            templateUrl: 'views/template.html',
            controller: "ModalController",
@@ -815,13 +794,10 @@ app.controller("help",function($scope,$rootScope,$stateParams,$ionicSideMenuDele
    };
 });
 
-app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, ModalService){
-  console.log($stateParams.id);
-  $rootScope.brand=$stateParams.id;
-  console.log("load");
+app.controller("load",function($scope,$rootScope,$sce,pullFb, ModalService){
   var link="https://fb-fan.herokuapp.com/#/app/"+$stateParams.id;
-  console.log(link);
   $scope.link = $sce.trustAsResourceUrl(link);
+  $rootScope.about=pullFb.getAbout();
 
   $scope.signup=function(){
     ModalService.showModal({
@@ -832,12 +808,14 @@ app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, Modal
 
 });
 
-app.controller("menu",function($ionicLoading){
+app.controller("menu",function($ionicLoading,pullFb,$rootScope){
   $ionicLoading.show({
     template: '<ion-spinner icon="spiral"></ion-spinner>',
   })
-
+  console.log("menu"),
+  pullFb.getAbout();
 });
+
 app.filter('dateFormat', function($filter)
 {
 
@@ -851,7 +829,7 @@ app.filter('dateFormat', function($filter)
 });
 
   app.config(function($stateProvider, $urlRouterProvider) {
-      $stateProvider.state('app', {url: '',abstract: true,templateUrl: 'views/menu.html',controller:'menu'})
+      $stateProvider.state('app', {url: ':id',abstract: true,templateUrl: 'views/menu.html',controller:'menu'})
       .state('load',{url:'/demo/:id',templateUrl: 'views/load-brand.html',controller:'load'})
       .state('brands', {url:'/brands',templateUrl: 'views/brands.html',controller:'brands'})
       .state('app.help',{url:'/app/:id',views:{menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
