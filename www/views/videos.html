@@ -3,14 +3,18 @@
     <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="toggleSearch()"></button>
   </ion-nav-buttons>
   <ion-content class="has-header" ng-init="init()">
-    <div collection-repeat="video in videos" >
+    <div class="feature-vid"><iframe src="{{played}}"  width="350" height="200" style="border:1px solid black;"></iframe></div>
+    <div collection-repeat="video in videos" class="video-item">
         <div class="list menu-list">
-          <div class="col col-3 post-item item-icon-left">
+          <div class="col col-3 item item-icon-left">
           <a class="border" ng-click='show(video.source)'>
-          <div class="col col-7">
+          <div class="col col-7 item item-icon-left">
             <p><small>{{item.created}}</small></p>
+            <p class="video-duration">{{video.length|number:0}} s</p>
             <img class="video-picture" ng-src="{{video.picture}}">
-            <h4 class="post"><strong>{{video.description| limitTo:50}}{{item.description.length > 50 ? '...' : ''}}</strong></h4>
+            <h4 class="video-title"><strong>{{video.description| limitTo:50}}{{item.description.length > 50 ? '...' : ''}}</strong></h4>
+            <h6 class="video-icon"><i class="ion-chevron-right"></i></h6>
+            <h6 class="small highlight"><small>Watch now</small></h6>
             </a>
           </div>
           </div>

@@ -1,26 +1,28 @@
+
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content class="menu-content">
-    <ion-nav-bar class="bar-dark">
+    <ion-nav-bar class="bar-dark mynavbar">
       <ion-nav-buttons side="left">
        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
-  <ion-side-menu side="left">
-    <ion-header-bar class="bar-light">
+  <ion-side-menu side="left" class="test3">
+    <ion-header-bar class="bar-light my-bar">
+      <img class="bdg" src="https://www.facebookbrand.com/img/fb-art.jpg"></img>
+    </br>
       <h1 class="title">Your App</h1>
     </ion-header-bar>
-    <ion-content>
-      <ion-list>
-          <ion-item class="menu-item" ng-href='#/app/{{id}}'><i class="icon1 ion-star" ng-class="cat.icon"></i> Timeline</ion-item>
-          <ion-item class="menu-item" ng-href="#/app/{{id}}/albums"><i class="icon1 ion-camera" ng-class="cat.icon"> </i> Photos</ion-item>
-          <ion-item class="menu-item" ng-href="#/app/{{id}}/events"><i class="icon1 ion-calendar" ng-class="cat.icon"></i> Events</ion-item>
-          <ion-item class="menu-item" ng-href="#/app/{{id}}/videos"><i class="icon1 ion-videocamera" ng-class="cat.icon"> </i> Videos</ion-item>
-          <ion-item class="menu-item" ng-href="#/app/{{id}}/product"><i class="icon1 ion-bag" ng-class="cat.icon"></i> Shop</ion-item>
-          <ion-item class="menu-item" ng-href="#/app/{{id}}/deals"><i class="icon1 ion-pricetags" ng-class="cat.icon"> </i> Promotions</ion-item>
-            <div class="item item-divider"> More Information</div>
-          <ion-item class="menu-item" ng-href="#/app/{{id}}/about"><i class="icon1 ion-information-circled" ng-class="cat.icon"></i> About us</ion-item>
+    <ion-content class="menu-content">
+      <ion-list class="menu-list">
+          <ion-item><a class="menu-item" menu-close ng-href='#/app/{{id}}'><i class="icon1 ion-star" ng-class="cat.icon"></i> Timeline</a></ion-item>
+          <ion-item ><a class="menu-item" menu-close ng-href='#/app/{{id}}/albums'><i class="icon1 ion-camera" ng-class="cat.icon"> </i> Photos</a></ion-item>
+          <ion-item ><a class="menu-item" menu-close ng-href="#/app/{{id}}/events"><i class="icon1 ion-calendar" ng-class="cat.icon"></i> Events</a></ion-item>
+          <ion-item ><a class="menu-item" menu-close ng-href="#/app/{{id}}/videos"><i class="icon1 ion-videocamera" ng-class="cat.icon"> </i> Videos</a></ion-item>
+          <ion-item ><a class="menu-item" menu-close ng-href="#/app/{{id}}/product"><i class="icon1 ion-bag" ng-class="cat.icon"></i> Shop</a></ion-item>
+          <ion-item ><a class="menu-item" menu-close ng-href="#/app/{{id}}/deals"><i class="icon1 ion-pricetags" ng-class="cat.icon"> </i> Promotions</a></ion-item>
+          <ion-item  ><a class="menu-item" menu-close ng-href="#/app/{{id}}/about"><i class="icon1 ion-information-circled" ng-class="cat.icon"></i> About us</a></ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>

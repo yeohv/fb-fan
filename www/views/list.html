@@ -1,3 +1,9 @@
+<style>
+.post-title{
+  font-family: 'Cabin', sans-serif;
+  font-weight:500;
+}
+</style>
 <ion-view title="{{title}}" >
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -10,19 +16,20 @@
     </label>
   </div>
   <ion-content class="has-header has-subheader" ng-init="init()">
-    <div collection-repeat="item in items|orderBy:'-item.created_time' | filter:query">
-      <div class="list menu-list">
-        <div class="col col-3 post-item item-icon-left">
+    <div collection-repeat="item in items|orderBy:'-created_time'">
+      <div class="card menu-list">
+        <div class="post-item item-text-wrap">
+        <div class="col col-3">
         <a class="border" ng-click='show(item.link)'>
-        <div class="col col-7">
-          <p><small>{{item.created}}</small></p>
           <img class="post-picture" ng-src="{{item.picture}}">
-          <h4 class="post"><strong>{{item.description| limitTo:50}}{{item.description.length > 50 ? '...' : ''}}</strong></h4>
-          <h6 class="post"><small><em>{{item.message| limitTo:50}}{{item.message.length > 50 ? '...' : ''}}</small></em></h6>
-          <h6 class="post"><small><em>{{item.created_time|limitTo:10}}</small></em></h6>
+        <div class="col col-7">
+          <h4 class="post post-title"><strong>{{item.message| limitTo:50}}{{item.message.length > 50 ? '...' : ''}}</strong></h4>
+          <h6 class="post small"><small class="highlight"><em><i class="icon2 ion-thumbsup"></i> {{item.likes.summary.total_count}}</small>&nbsp;&nbsp;</em><i class="icon2 ion-chatbox"></i> <small class="highlight"><em>{{item.comments.summary.total_count}}</small></em></h6>
+          <h6 class="post date-post highlight"><small><em>{{item.created_time| date:dateFormat}}</small></em></h6>
         </a>
         </div>
         </div>
+      </div>
       </div>
     </div>
   </ion-content>
