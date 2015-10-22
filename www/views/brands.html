@@ -1,23 +1,30 @@
 <ion-view title="{{title}}" >
   <div class="bar item-input-inset">
     <label class="item-input-wrapper">
-      <i class="icon ion-ios-search placeholder-icon"></i>
-      <input class="brands-background" type="search" ng-model="query" ng-click="search(query)" placeholder="Search">
+    <i class="icon ion-location placeholder-icon"></i>
+    <input class="brands-background" type="search" ng-model="add" placeholder="add"></input>
     </label>
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input class="brands-background" type="search" ng-model="query" placeholder="Search">
+    </label>
+    <button class="button button-dark" ng-click="address(add,query)">search</button>
   </div>
   <ion-content class="has-header" ng-init="init()">
-    <div collection-repeat="brand in brands| orderBy: '-brand.likes'">
-      <div class="list">
+    <div collection-repeat="brand in brands| orderBy: 'likes'">
+      <div class="list brands-list">
         <a class="item-thumbnail-left">
-          <h2 class="color1"><span class="highlight">#{{$index + 1}} </span>- {{brand.name}}</h2>
+          <h2 class="color1"><strong><span class="highlight">#{{$index + 1}} </span>- {{brand.name}}</strong></h2>
           <h5 class="color1">Id: {{brand.id}}</h5>
           <h6 class="color1">Likes: {{brand.likes}}</h6>
           <h6 class="color1">Website: {{brand.website}}</h6>
           <h6 class="color1">Emails: {{brand.emails}}</h6>
           <h6 class="color1">Category: {{brand.category}}</h6>
-          <a ng-href="http://fb-fan.herokuapp.com/#/demo/{{brand.id}}"><p><span class="highlight">http://fb-fan.herokuapp.com/#/demo/{{brand.id}}</span></p></a>
+          <a class="color1 highlight" ng-href="http://fb-fan.herokuapp.com/#/demo/{{brand.id}}"><p>http://fb-fan.herokuapp.com/#/demo/{{brand.id}}</p></a>
+          <button class="button button-positive send">Send Email</button>
           <hr>
         </a>
+
       </div>
     </div>
   </ion-content>

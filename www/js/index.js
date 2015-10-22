@@ -43,9 +43,28 @@ app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce)
     getBrands: function(query){
       console.log("query here");
       console.log(query);
-			$http.get("https://graph.facebook.com/v2.5/search?access_token=CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU&type=page&q="+query+"&fields=id,name,category,description,about,likes,website,phone,emails,location,link,cover&limit=9999").then(function(response){
+      var url="https://graph.facebook.com/v2.5/search?access_token=CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU&type=page&q="+query+"&fields=id,name,category,description,about,likes,website,phone,emails,location,link,cover&limit=9999"
+      console.log(url);
+      $http.get(url).then(function(response){
 				data = response.data.data;
-        //console.log("============================ BRANDS ============================ ");
+        console.log("============================ BRANDS ============================ ");
+        console.log(data);
+        $rootScope.brands=data;
+        $ionicLoading.hide();
+        return $rootScope.brands;
+			});
+		},
+    getBrandfromLocation: function(lat,long,q){
+      console.log("==query here===");
+      var qi=q;
+      console.log(qi);
+      console.log(long);
+      console.log(lat);
+      var url="https://graph.facebook.com/v2.5/search?access_token=CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU&type=page&q="+qi+"&center="+lat+","+long+"&distance=9000"+"&fields=id,name,category,description,about,likes,website,phone,emails,location,link,cover&limit=9999"
+      console.log(url);
+      $http.get(url).then(function(response){
+				data = response.data.data;
+        console.log("============================ BRANDS ============================ ");
         console.log(data);
         $rootScope.brands=data;
         $ionicLoading.hide();
@@ -759,13 +778,26 @@ $scope.init = function(){
      $rootScope.photos=pullFb.getPhotos();
   }
 });
-app.controller("brands",function($scope,$rootScope,pullFb){
+app.controller("brands",function($scope,$rootScope,$http,pullFb){
     console.log("brands");
     $scope.init = function(){
       $scope.title="Brands";
     }
     $scope.search=function(query){
       $rootScope.brands=pullFb.getBrands(query);
+      console.log($rootScope.brands);
+    }
+    $scope.address=function(add,query){
+      var address=add;
+      console.log("query:"+address);
+      var url="http://maps.google.com/maps/api/geocode/json?address="+address+"&sensor=false";
+      console.log(url);
+      $http.get(url).then(function(response){
+        var location=response.data.results[0].geometry.location;
+        var lat=location.lat;
+        var long=location.lng;
+        pullFb.getBrandfromLocation(lat,long,query);
+      });
       console.log($rootScope.brands);
     }
 
@@ -779,6 +811,9 @@ app.controller("help",function($scope,$rootScope,$ionicLoading,pullFb, ModalServ
     $scope.init = function(){
         $scope.title="Timeline";
         $rootScope.items=pullFb.getPosts();
+        $ionicLoading.show({
+          template: '<ion-spinner icon="spiral"></ion-spinner>',
+        });
 
     };
     $scope.clickSearch = function(){
@@ -809,9 +844,6 @@ app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, Modal
 });
 
 app.controller("menu",function($ionicLoading,pullFb,$rootScope){
-  $ionicLoading.show({
-    template: '<ion-spinner icon="spiral"></ion-spinner>',
-  })
   console.log("menu"),
   pullFb.getAbout();
 });
