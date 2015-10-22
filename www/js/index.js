@@ -843,6 +843,13 @@ app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, Modal
 
 });
 
+app.controller('home', function($scope, $location, $anchorScroll) {
+   $scope.scrollTo = function(id) {
+      $location.hash(id);
+      $anchorScroll();
+   }
+});
+
 app.controller("menu",function($ionicLoading,pullFb,$rootScope){
   console.log("menu"),
   pullFb.getAbout();
@@ -872,6 +879,6 @@ app.filter('dateFormat', function($filter)
       .state('app.events', {url:'/app/:id/events',views: {menuContent: {templateUrl: 'views/events.html',controller:'events'}}})
       .state('app.videos', {url:'/app/:id/videos',views: {menuContent: {templateUrl: 'views/videos.html',controller:'videos'}}})
       .state('error',{url:'/error',templateUrl: 'views/error.html'})
-      .state('home',{url:'/home',templateUrl: 'views/home.html'})
+      .state('home',{url:'/home',templateUrl: 'views/home.html',controller:'home'})
       $urlRouterProvider.otherwise('/error');
     });

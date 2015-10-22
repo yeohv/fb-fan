@@ -2,12 +2,12 @@
 
 body{
   font-family: 'Cabin', sans-serif;
-  overflow-y: none;
+  overflow-y: scroll !important;
   text-align: center;
   padding:0;
   background-color:rgba(0, 0, 0, 0);
-
 }
+
 a:-webkit-any-link{
 text-decoration:none !important;
 }
@@ -480,4 +480,72 @@ right:0;
 }
 .item-input-wrapper{
   width:1000px;
+}
+.mobile-bdg{
+  font-family: 'Cabin', sans-serif;
+  background: url(../css/mobile-bdg1.jpg) no-repeat center center fixed;
+  height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 0;
+  margin:0;
+  position: fixed;
+  top:0;
+
+}
+
+.mobile-bdg .brand{
+  font-family: 'Cabin', sans-serif;
+  font-size: 20px;
+  text-align: left;
+  padding-left: 50px;
+  padding-top: 50px;
+  color: #D9CEF0;
+}
+.mobile-bdg .title{
+  font-family: 'Montserrat', sans-serif;
+  text-align: left;
+  position: fixed;
+  top:300px;
+  padding-left: 50px;
+  color:white;
+}
+.mobile-bdg .tagline{
+  font-family: 'Cabin', sans-serif;
+  text-align: left;
+  position: fixed;
+  top:400px;
+  padding-left: 50px;
+  color:#E3E3E3;
+  font-size: 16px;
+  line-height:28px;
+}
+
+.mobile-bdg {
+  text-align: left;
+  position: fixed;
+  top:400px;
+  padding-left: 50px;
+  color:white;
+}
+.overlay{
+  position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ z-index: 10;
+ background-color: rgba(52, 47, 61, 0.8); !important; /*dim the background*/
+/* -webkit-filter: grayscale(80%);*/
+}
+
+.profile-sign-up{
+  position: fixed;
+  top:320px;
+  left:50px;
+}
+.mobile-bdg .overlay .strong{
+  color:#9B90C5;
 }
