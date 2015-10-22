@@ -879,6 +879,6 @@ app.filter('dateFormat', function($filter)
       .state('app.events', {url:'/app/:id/events',views: {menuContent: {templateUrl: 'views/events.html',controller:'events'}}})
       .state('app.videos', {url:'/app/:id/videos',views: {menuContent: {templateUrl: 'views/videos.html',controller:'videos'}}})
       .state('error',{url:'/error',templateUrl: 'views/error.html'})
-      .state('home',{url:'/home',templateUrl: 'views/home.html',controller:'home'})
-      $urlRouterProvider.otherwise('/error');
+      .state('home',{url:'/',templateUrl: 'views/home.html',controller:'home'})
+      $urlRouterProvider.otherwise('/');
     });
