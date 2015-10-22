@@ -4,7 +4,8 @@
   "description": "convert fan page to apps",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "sendgrid": "^1.9.2"
   },
   "devDependencies": {},
   "scripts": {

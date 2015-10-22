@@ -1,9 +1,8 @@
 
 function sendVoucher(id,name,email,callback){
-    var api_key = 'key-97f2a7e6a4b390d1cbf67e1141272b76';
-    var api_key = '';
+    var api_key = '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';
   // using SendGrid's Node.js Library - https://github.com/sendgrid/sendgrid-nodejs
-  var sendgrid = require("sendgrid")(api_user, api_key);
+  var sendgrid = require("sendgrid")(api_key);
 
   var text= "Dear " + name + ",\n"
   + "I am Vanessa from StartYourApp, an organization that helps businesses communicate better with their customers.We think we can help you engage your customers much better than Facebook pages and newsletters.\n\n"
