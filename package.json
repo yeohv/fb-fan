@@ -4,15 +4,12 @@
   "description": "convert fan page to apps",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.13.3",
-    "sendgrid": "^1.9.2",
-    "mailgun-js": "^0.7.1",
-    "mongodb": "^2.0.36"
+    "express": "^4.13.3"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node server.js",
-    "test": "node server.js" 
+    "test": "node server.js"
   },
   "repository": {
     "type": "git",
