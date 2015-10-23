@@ -783,7 +783,7 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
       var brand=b;
       $http({
                   url: 'https://fan-server.herokuapp.com/send',
-                  type: "POST",
+                  type: "GET",
                   data: "id="+b.id+"&email="+b.email+"&name="+b.name,
                   success: function() { }
               });
