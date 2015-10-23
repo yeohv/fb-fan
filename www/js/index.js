@@ -752,7 +752,7 @@ app.controller("videos",function($scope,$rootScope,pullFb,$sce, ModalService){
 
 });
 
-app.controller('ModalController', function($scope, close,$rootScope,$sce) {
+app.controller('ModalController', function($scope, close,$rootScope,$sce,pullFb) {
 $scope.play = $sce.trustAsResourceUrl($rootScope.src);
 console.log($scope.play);
   pullFb.analytics("Openlink");
