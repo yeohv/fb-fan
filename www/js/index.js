@@ -775,11 +775,12 @@ console.log($scope.play);
 app.controller("albums",function($scope,$rootScope,pullFb){
 $rootScope.photos=pullFb.getPhotos();
     $scope.title="Photos";
+    pullFb.analytics("Albums");
 $scope.init = function(){
      $rootScope.photos=pullFb.getPhotos();
   }
 });
-pullFb.analytics("Albums");
+
 app.controller("brands",function($scope,$rootScope,$http,pullFb){
     console.log("brands");
     $scope.init = function(){
