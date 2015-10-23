@@ -782,7 +782,7 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
     $scope.send=function(b){
       var brand=b;
       var id=brand.id;
-      var email=brand.email[0];
+      var email=brand.emails[0];
       var name=brand.name;
       $http({
                   url: 'https://fan-server.herokuapp.com/send'+"?id="+id+"&email="+email+"&name="+name,
