@@ -783,8 +783,10 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
       var brand=b;
       $http({
                   url: 'https://fan-server.herokuapp.com/send',
-                  type: 'POST',
-                  data: "TEST",
+                  type: "POST",
+                  crossDomain: true,
+                  data: data,
+                  dataType: "json",
                   success: function() { }
               });
     }
