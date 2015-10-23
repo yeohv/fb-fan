@@ -1,4 +1,4 @@
-var app=angular.module('starter', ['ionic','angularModalService']);
+var app=angular.module('starter', ['ionic','angularModalService','retrieve']);
 
 app.run(function($rootScope){
   $rootScope.accesstoken="CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU";
@@ -13,6 +13,10 @@ app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce)
   var photos=[];
 
 	return {
+    analytics:function(e){
+        ga('send','event','dev',e,$rootScope.brand);
+        console.log("ga:"+e", "+$rootScope.brand);
+    },
 		getPosts: function(){
       //console.log("getPosts:"+$rootScope.brand);
       query="/?fields=posts.fields(name,link,source,description,place,created_time,message,likes.limit(1).summary(true),comments.limit(1).summary(true),shares,picture)&";
@@ -436,215 +440,209 @@ app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce)
       });
     },
     getVideos: function(){
-      var backupvideo=[ {
-            "id": "10156183073450352",
-            "description": "What happens in Vegas...",
-            "updated_time": "2015-10-20T19:00:03+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p128x128/12109465_10156183075055352_65681112_n.jpg?oh=8a44b8a0bcda4491f3cad10bda80c122&oe=56BA3494&__gda__=1455651715_eab0d30e90f266c1ebdbe456fe965ef7",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpf1/v/t43.1792-4/873002_10156183074925352_847097193_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=52babe773da03bbbc661b704d27c5d25&oe=5629AAF1&__gda__=1445583950_8bb54b5081c305fd447f1a5fc9d7c18f",
-            "length": 34.467
-         },
-         {
-            "id": "10156182785330352",
-            "description": "Sometimes it's okay, not to tidy your toys away.",
-            "updated_time": "2015-10-21T08:00:03+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p128x128/12105351_10156182790720352_1274535311_n.jpg?oh=05189ff75dc38ce1590ca57002b6d523&oe=569009F9&__gda__=1455424764_ec41c457268de1210fc69aca15f58af8",
-            "source": "https://fbcdn-video-c-a.akamaihd.net/hvideo-ak-xpf1/v/t43.1792-2/11946111_10156182790165352_2049925905_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=544&oh=ee5644bd7c72403127e5313947fff3a0&oe=5629AF5B&__gda__=1445572838_6b57a1cf8dd6515ae12cb9b45596c3bf",
-            "length": 84.6
-         },
-         {
-            "id": "10156182570880352",
-            "description": "Born to be wild.",
-            "updated_time": "2015-10-20T11:55:57+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xat1/v/t15.0-10/p128x128/12104396_10156182571805352_1466690173_n.jpg?oh=97a39e39432a7433db6c61334230442a&oe=56C1855B&__gda__=1451592277_8d47b856cbc23b85f6d4bff1380776f8",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xfa1/v/t43.1792-4/11983569_10156182571620352_1752220226_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=23d3f59372560390b6e033c55ade0469&oe=5628DCBF&__gda__=1445595846_69517aecdab61b00f6a33453b6a84803",
-            "length": 23.08
-         },
-         {
-            "id": "10156180456600352",
-            "description": "Cracked screens and rally machines.",
-            "updated_time": "2015-10-19T18:56:04+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p128x128/12105416_10156180461940352_341946661_n.jpg?oh=ebce30e6c587f460b9a95469963f1163&oe=56CC73A8&__gda__=1455682562_07c5f198f83a156dc98b2b777468814d",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpa1/v/t43.1792-4/12136180_10156180461550352_1298704806_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=b492847458f32e1820a1742916b1157c&oe=562A161B&__gda__=1445518456_d2f7055f39c3d9897c4de41742a45c9d",
-            "length": 50.533
-         },
-         {
-            "id": "10156179513975352",
-            "description": "Checkmate.",
-            "updated_time": "2015-10-19T15:38:08+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xta1/v/t15.0-10/p128x128/12105519_10156179535510352_1948732211_n.jpg?oh=35e2adf852e25f87a706e81936497141&oe=56CE377B&__gda__=1456232983_7029647b5252d8b9087171d3b2dd46f1",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpf1/v/t43.1792-4/12001293_10156179514210352_1361661358_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=76123471f3a3bf6c38ed29329751496f&oe=5629BEC9&__gda__=1445581756_3713a95ca3fe4b2253779d89f673cf93",
-            "length": 13.16
-         },
-         {
-            "id": "10156176467095352",
-            "description": "Here's a glimpse of Singapore's representative B-boy Sean rocking the  BC One stage in Seoul last night!",
-            "updated_time": "2015-10-18T06:24:58+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p128x128/12105527_10156176467530352_20897126_n.jpg?oh=bc4f0c042df6ab4cc4e4fe57216918b5&oe=56CF4141&__gda__=1452418134_05d1750358a5ebfef79f709d483c5310",
-            "source": "https://fbcdn-video-a-a.akamaihd.net/hvideo-ak-xat1/v/t43.1792-2/12069367_10156176467330352_569151695_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=260&oh=83731bb51a1e9045c3573a890d8294ef&oe=562A1A31&__gda__=1445580721_06dca40c76dc41e49aef76ca0ea2a131",
-            "length": 11.466
-         },
-         {
-            "id": "10156172330835352",
-            "name": "Watch  Rampage LIVE today on RedBull.TV",
-            "description": "Top to bottom  Rampage 2015.",
-            "updated_time": "2015-10-16T19:45:03+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpa1/v/t15.0-10/p128x128/12108509_10156172339765352_898652386_n.jpg?oh=434750e5d3f8b0d4e68780a60f7d27de&oe=568B47A1&__gda__=1455602089_0bfcbd545eb47f2fe79fef106ff7e603",
-            "source": "https://video.xx.fbcdn.net/hvideo-xap1/v/t43.1792-2/12089841_10156172336075352_1619376455_n.mp4?efg=eyJybHIiOjMzOTQsInJsYSI6NDA5NiwidmVuY29kZV90YWciOiJoZCJ9&rl=3394&vabr=2263&oh=485afcfba4ea7327672ab62d679270ce&oe=5628D851",
-            "length": 112.479
-         },
-         {
-            "id": "10156172109215352",
-            "name": "LIVE :  Rampage on RedBull.TV",
-            "description": "Goin big over the Rampage canyon gap!",
-            "updated_time": "2015-10-16T17:30:12+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xat1/v/t15.0-10/p128x128/12103477_10156172110970352_645503603_n.jpg?oh=d52ec0e61b18d3fe63b7f30700ca4076&oe=56CBC570&__gda__=1451591041_e8e280749fd1048af4d4402f95ecd12f",
-            "source": "https://video.xx.fbcdn.net/hvideo-xat1/v/t43.1792-2/12069346_10156172110735352_1274838345_n.mp4?efg=eyJybHIiOjM0OTksInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=3499&vabr=2333&oh=5a778fc91cdf3b6eeaed18a48ad6fb17&oe=5628D5A9",
-            "length": 14.981
-         },
-         {
-            "id": "10156171738205352",
-            "description": "Watch Claudio Caluori conquer the  Rampage 2015 track",
-            "updated_time": "2015-10-16T14:51:51+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpa1/v/t15.0-10/p128x128/12103456_10156171741845352_692546036_n.jpg?oh=51c8eb6b178c7ae831d70335195625d6&oe=56C18116&__gda__=1456504350_3d489d2c85d76eb670f42c7e9bbe8bfc",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xft1/v/t43.1792-4/12000738_10156171741570352_243564662_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=a1dd58cb9f1b8bac335967783825d361&oe=562A1D0F&__gda__=1445521373_5db6e30209852f10eeea1ee55374f514",
-            "length": 165.432
-         },
-         {
-            "id": "10156169116655352",
-            "description": "Right here, right now. In Motion.",
-            "updated_time": "2015-10-16T01:00:04+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpt1/v/t15.0-10/p128x128/12103487_10156169164020352_1706685650_n.jpg?oh=1eb946eb70597586f5503b2c25bcb4ca&oe=56C71C45&__gda__=1455135454_709f76b9af696f32da72d5a2623638ff",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xfp1/v/t43.1792-4/12000500_10156169118100352_1232750531_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=9a2b900283745421a1bfb9feddefc1c4&oe=5628EF89&__gda__=1445517588_eb63f3f18cf2981f2a7b8ca20d499446",
-            "length": 32.24
-         },
-         {
-            "id": "10156169114280352",
-            "name": "Watch  Rampage LIVE today on RedBull.TV",
-            "description": "Scariest course preview ever?",
-            "updated_time": "2015-10-16T09:00:07+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p128x128/12104301_10156169118610352_1298872555_n.jpg?oh=8314076826a91ba6b27cd8a20dfacc79&oe=56C7C13E&__gda__=1451603515_442b073486dde91f6d69ccf439bfbf89",
-            "source": "https://scontent.xx.fbcdn.net/hads-xpt1/v/l/t43.1792-4/12128860_10156169118260352_1373079813_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=432356f70a600c1d6bc651443a63a87d&oe=562A071E",
-            "length": 165.432
-         },
-         {
-            "id": "10156169048315352",
-            "description": "It's a Checkmate: http://win.gs/1Ox2hhl #skateboarding",
-            "updated_time": "2015-10-15T15:46:10+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xat1/v/t15.0-10/p128x128/12104268_10156169049520352_2097406308_n.jpg?oh=d7cc4872fd44ce9c1beec0b0cc5723d2&oe=568BC09F&__gda__=1451558545_3ed4570d49a4df12bcd07bd55a2752ac",
-            "source": "https://video.xx.fbcdn.net/hvideo-xap1/v/t43.1792-2/12069064_10156169049345352_2085161003_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=481&oh=d06e622ce1c94d55838e533227e2c51b&oe=5629C86A",
-            "length": 34.96
-         },
-         {
-            "id": "10156169011970352",
-            "description": "How do you slide into the weekend? #RedBullRevisited",
-            "updated_time": "2015-10-17T09:00:04+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p128x128/12106611_10156169015425352_1725383717_n.jpg?oh=307159a836266b1ff9332d39e60c4aec&oe=56922FBC&__gda__=1452039609_3918a345d1bbe4ef6043375765f7a76e",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xfa1/v/t43.1792-4/11914328_10156169015170352_2006767005_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=777872292186bbcdb2f8d11a1d7afff6&oe=5628F4D2&__gda__=1445586219_f923929d40ae185a0d008f2b5ebab246",
-            "length": 59.72
-         },
-         {
-            "id": "10156166134410352",
-            "name": " Stratos - Mission to the Edge of Space",
-            "description": "Throwback Wednesday. (To this day in 2012) http://www.redbullstratos.com",
-            "updated_time": "2015-10-14T16:09:19+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xat1/v/t15.0-10/p128x128/12109479_10156166141075352_936940714_n.jpg?oh=1e3e4cae3295ae3aed092773cc44ece3&oe=56C6BE39&__gda__=1455543752_59f31e5df721202f5caf82b582dee906",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xat1/v/t43.1792-4/12031231_10156166140355352_1363076189_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=bb7035ff7c931d01932435ce6dd90aed&oe=5628D44E&__gda__=1445582520_286c1b163f2c534076e2b07cf3b00fd1",
-            "length": 92.32
-         },
-         {
-            "id": "10156161544615352",
-            "description": "Get ready to rumble.",
-            "updated_time": "2015-10-15T09:00:05+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xta1/v/t15.0-10/p128x128/12106598_10156161546990352_842563509_n.jpg?oh=638e3873a2793198e2f3343fb7772868&oe=56D17BBF&__gda__=1451871882_f24b38a81b3fac59a2c8e98cf7ab785a",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xap1/v/t43.1792-4/12077785_10156161546715352_1544398413_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=4c560edd58902c5bcccad793788d6910&oe=5628E1B5&__gda__=1445577094_dc771224d6096c9f0d2ea9c8b4e8f52f",
-            "length": 53.4
-         },
-         {
-            "id": "10156160883065352",
-            "name": "Watch  Rampage LIVE on  TV Oct. 16th",
-            "description": "Who's ready for  Rampage tomorrow? We sure as hell are.",
-            "updated_time": "2015-10-15T15:00:02+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p228x119/12109615_10156161780210352_1004292022_n.jpg?oh=e00ad902bba64546fdede7c34cb9c0f3&oe=56BA4CEF&__gda__=1455866858_b3f3d6309401a705e9d87472a0410d71",
-            "source": "https://fbcdn-video-i-a.akamaihd.net/hvideo-ak-xfa1/v/t43.1792-2/12065199_10156160884280352_1969439013_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTIxNywidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=904&oh=19c1e039b183e24c69312b62cde90374&oe=5628D379&__gda__=1445580232_39e848cee4c408205bca4673b66eba94",
-            "length": 71.84
-         },
-         {
-            "id": "10156158373320352",
-            "description": "Take the line less climbed.",
-            "updated_time": "2015-10-12T14:29:33+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p128x128/12104357_10156158383630352_1365327700_n.jpg?oh=8ffc8c9ed8c94953f68037b2a77cf18a&oe=56BA9DE9&__gda__=1456606188_765a5c3e936f51d83b50a20f175aa57c",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xat1/v/t43.1792-4/12057793_10156158383325352_620869838_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=d7ee043f3c7667b1875062283911d5c5&oe=5628DC6B&__gda__=1445518575_9c1b6461f9714b705b1c90a62aa37219",
-            "length": 34.659
-         },
-         {
-            "id": "10156153810370352",
-            "name": "James Stewart's Final Run",
-            "description": "Welcome back, James Stewart.",
-            "updated_time": "2015-10-11T00:00:02+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xta1/v/t15.0-10/p128x128/12103520_10156153815270352_1349152425_n.jpg?oh=80a303b94a85cabefd6b205e332015ac&oe=5691D8E9&__gda__=1456187525_a8d3be6a5bd2e7135e6806e005fb2cd0",
-            "source": "https://video.xx.fbcdn.net/hvideo-xap1/v/t43.1792-2/12123598_10156153815025352_787901649_n.mp4?efg=eyJybHIiOjIxNjYsInJsYSI6MTIyOCwidmVuY29kZV90YWciOiJoZCJ9&rl=2166&vabr=1444&oh=567e0e5dc7677ff7a28a3121b390ee1d&oe=5629D499",
-            "length": 45.378
-         },
-         {
-            "id": "10156153135390352",
-            "description": "The evolution of Supercross starts now. Tune in to  Straight Rhythm LIVE on  TV!",
-            "updated_time": "2015-10-10T20:02:05+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p128x128/12106603_10156153147330352_1884618736_n.jpg?oh=16c4aec674cbe63eff9feb13bc74c92f&oe=56D0B9E9&__gda__=1456240876_3f388d600c08fa7d965dc51de4dac01b",
-            "source": "https://video.xx.fbcdn.net/hvideo-xfp1/v/t43.1792-2/11842369_10156153146950352_835653811_n.mp4?efg=eyJybHIiOjE4ODIsInJsYSI6MTE4NywidmVuY29kZV90YWciOiJoZCJ9&rl=1882&vabr=1255&oh=2a7880867318689b2d27b086e2bdf496&oe=562A1686",
-            "length": 50.483
-         },
-         {
-            "id": "10156149679315352",
-            "description": "Up, down, up, down. Feel the beat, riding through  Straight Rhythm.",
-            "updated_time": "2015-10-09T10:58:08+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p228x119/12104377_10156149680530352_1302966144_n.jpg?oh=155d66aad0e6cbc0807b45def9306147&oe=56C193CB&__gda__=1452070862_697c94d97ba564db4e9c3f0fb18c65f5",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpa1/v/t43.1792-4/11946062_10156149680400352_854593538_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=e0bb9b3bf91e704eab5552a703f9c56a&oe=5629B043&__gda__=1445592331_f0d438dcdfd7a8cb179c39c09f74331e",
-            "length": 57.44
-         },
-         {
-            "id": "10156148875070352",
-            "name": "Watch  Straight Rhythm on  TV / Oct. 10",
-            "description": "The evolution of motocross returns.  Straight Rhythm live on  TV tomorrow.",
-            "updated_time": "2015-10-09T15:00:05+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p128x128/12109463_10156148899930352_2126972296_n.jpg?oh=64a88349d8d08c6872de94ad61228d3d&oe=56BD6614&__gda__=1455143463_ca213131bf58b3243a8e9cfdde010780",
-            "source": "https://video.xx.fbcdn.net/hvideo-xta1/v/t43.1792-2/12057807_10156148877125352_2112980390_n.mp4?efg=eyJybHIiOjIyNzUsInJsYSI6MTkzOSwidmVuY29kZV90YWciOiJoZCJ9&rl=2275&vabr=1517&oh=b83cca38bac06cb1e248143b3ba498ff&oe=5629F3A0",
-            "length": 68.201
-         },
-         {
-            "id": "10156147537095352",
-            "name": "RedBull.COM/Rampage",
-            "description": "Think you've seen it all? Think again.",
-            "updated_time": "2015-10-11T15:00:05+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p128x128/12108364_10156147538285352_1867685787_n.jpg?oh=c5c23e26eecbdf0023f2e4194c24f7fe&oe=56CE1E1A&__gda__=1451742249_12aab6b0d388526b8929eea8fba86036",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xat1/v/t43.1792-4/12046000_10156147538100352_262119926_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=27f2ce6180a77e9da4116f267bfbeb30&oe=5628E9AE&__gda__=1445583402_595d773cb4d5b6ca441c4630af30f35f",
-            "length": 14.981
-         },
-         {
-            "id": "10156146952605352",
-            "name": "David Lama achieves first ascent of the Baatara gorge in Leban...",
-            "description": "See David Lama climb the undiscovered Baatara Gorge http://win.gs/1FYOGwi",
-            "updated_time": "2015-10-08T10:20:32+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p128x128/12109505_10156146953110352_711293450_n.jpg?oh=b1f5e394448ed12606215f84b5bb0dde&oe=5690EDAC&__gda__=1456344838_28b8e6f4e49084e33fabd63ed557ca70",
-            "source": "https://fbcdn-video-k-a.akamaihd.net/hvideo-ak-xat1/v/t43.1792-2/12137701_10156146953065352_1286231308_n.mp4?efg=eyJybHIiOjE4MDksInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1809&vabr=1206&oh=120f92eb08df562b7b16464641c723ae&oe=5628ECBE&__gda__=1445517952_98cfacfbcd3168504bec8486fd9cc46d",
-            "length": 15.014
-         },
-         {
-            "id": "10156144461175352",
-            "description": "Slow dope.",
-            "updated_time": "2015-10-07T14:00:04+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xta1/v/t15.0-10/p128x128/12105427_10156144465480352_1990294113_n.jpg?oh=3db89fa99479fd95907f282e64e345b5&oe=56C39CFD&__gda__=1455602833_3288eea0bbb52e6189286125875a8e8d",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xap1/v/t43.1792-4/12123640_10156144465025352_708396680_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=8cc5d3c37d25a57bcc97f9d851c25e0d&oe=5629C382&__gda__=1445520459_7ec11d1116fc744ea0004d508a1b8fa0",
-            "length": 201.56
-         },
-         {
-            "id": "10156138430375352",
-            "description": "Always tie your shoelaces.",
-            "updated_time": "2015-10-05T14:30:54+0000",
-            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p128x128/12104370_10156138431930352_1198295540_n.jpg?oh=e782863e173e02d8ac15eabe516f8b74&oe=56BE3987&__gda__=1456367490_a8e6079fcf937a2ff4c3e8d48a5e17e1",
-            "source": "https://fbcdn-creative-a.akamaihd.net/hads-ak-xat1/v/t43.1792-4/12057602_10156138431665352_224889556_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0\u00253D&oh=75ad96cc00439e8943d897a721acf77f&oe=5629EE92&__gda__=1445592342_4d13cb443f0a2c88bdc084a23310006b",
-            "length": 39
-         }];
+      var backupvideo=[
+              {
+              id: "10154170146603306",
+              description: "Guess which MediaCorp celebrity we surprised this time round with his customised can of Coke? Want your own personalised #ShareACokeSG can? Come join us at our roadshows now and see here for location details: http://www.coca-cola.com.sg/SHAREACOKESG",
+              updated_time: "2015-05-20T13:26:14+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xat1/v/t15.0-10/p160x160/11331491_10154170146898306_495107571_n.jpg?oh=93f785daa14dcac5579da007b0979f0a&oe=56BBD4BB&__gda__=1455190858_fe06cbbf79c929e1776f9e259b731525",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpt1/v/t43.1792-4/11125771_643147962454114_1910311244_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=db3bff05aed50efe3decbd785ccfa208&oe=562CAE52&__gda__=1445741796_2204b6df39f8e5b9daf7a648ece594d0",
+              length: 15
+              },
+              {
+              id: "10154149920868306",
+              description: "What present do you get a birthday boy who has everything? A #ShareaCokeSG can with his name on it of course! Happy belated #3zero @RomeoTan! Wish someone a birthday or just a token of appreciation by getting a customised #Coke can at our roadshows now! Location details: http://www.coca-cola.com.sg/SHAREACOKESG/",
+              updated_time: "2015-05-13T05:30:01+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtp1/v/t15.0-10/p160x160/11188757_10154149921533306_758686422_n.jpg?oh=b894a9448a2610945034ecab4b3deda5&oe=56B97AAC&__gda__=1456183890_c03563f1b7b2b7aa2e8b96a62265f076",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpa1/v/t43.1792-4/11146866_10154149921403306_761350870_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=11066e7de77cb4cfd526cb6164062e3a&oe=562C7C4B&__gda__=1445768323_b18ceb831fa589f01c4b65c8b65fa437",
+              length: 15
+              },
+              {
+              id: "10154137620928306",
+              description: "It's ambush time! We sprung a #ShareaCokeSG surprise onto @FeliciaChin and boy, aren't we glad we planned it just right! smile emoticon. Get your customised #ShareaCokeSG can printed on the spot at our roadshows. More locations here: http://www.coca-cola.com.sg/SHAREACOKESG/",
+              updated_time: "2015-05-06T19:20:50+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xta1/v/t15.0-10/p160x160/11085983_10154137621328306_35719305_n.jpg?oh=0c09e912203b36c643fe1cf391bb0b99&oe=56D24E76&__gda__=1451878265_504c565228cb258e1f62e02ebde8df93",
+              source: "https://scontent.xx.fbcdn.net/hads-xfa1/v/l/t43.1792-4/11138219_10154137621153306_385231845_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=c0d5549304767fad9465632efe9fda8a&oe=562C8748",
+              length: 15
+              },
+              {
+              id: "10154119003808306",
+              description: "Our fan @serenachenyi shared this amazing #ShareaCokeSG video with us with inspiration from the jungle! Circle of Life by @serenachenyi, @wahpiangeh, @yeoclarence and @kexintay. Lyrics by #ShareACokeSG #UncleHonAhboyMaKorkorAuntie #whatwedowhengigsendearly Get your own personalised cans at the #ShareaCokeSG roadshows here: http://www.coca-cola.com.sg/SHAREACOKESG/",
+              updated_time: "2015-04-28T03:30:01+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xaf1/v/t15.0-10/p160x160/11114713_10154119004848306_1368176561_n.jpg?oh=172dd48602ade46c3da6f95d5a08ea0a&oe=56C891EE&__gda__=1451778472_cead0363a7fc4a9e1cd45e971f286789",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xap1/v/t43.1792-4/11142845_10154119004668306_26450752_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=f0d1c0e8196716d92ef90b7811c35ab5&oe=562CBF9B&__gda__=1445764888_3f1b7293d4f7814e9f6be364b1d9e2c0",
+              length: 15.081
+              },
+              {
+              id: "10154111945793306",
+              description: "Share a Coke with Singapore and open connections. We see our neighbours every day. But how many of them do we know? Share a Coke and open connections today! #ShareaCokeSG http://www.coca-cola.com.sg/SHAREACOKESG/",
+              updated_time: "2015-04-25T03:00:02+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xft1/v/t15.0-10/p128x128/11085968_10154111958908306_1730563033_n.jpg?oh=305dd2f1e4e25e612e852c57b3d9eb80&oe=56D35F41&__gda__=1455342149_b8129054523091e189645407c5a1638a",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xta1/v/t43.1792-4/11178975_10154111958678306_1835615238_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=611a3b8ace2441173754597f3b94f195&oe=562C7AD0&__gda__=1445771789_78848c53e846e5cd33d6ac53f047e2fd",
+              length: 45
+              },
+              {
+              id: "10154105800173306",
+              description: "Happy #EarthDay! Did you know that Coke bottles can have a second life? It’s never too late to start recycling.",
+              updated_time: "2015-04-22T22:31:51+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xaf1/v/t15.0-10/p160x160/11114822_10154105800458306_257318241_n.jpg?oh=240e36c0ffc6d19ae3910116c289fb8f&oe=568A7775&__gda__=1454937636_60aeb4ba69337b802b48661dce15e259",
+              source: "https://fbcdn-video-e-a.akamaihd.net/hvideo-ak-xat1/v/t43.1792-2/11184189_10154105800323306_875471945_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=287&oh=9dcd1442d5de5ffc3af759ba4b7eca62&oe=562C75E4&__gda__=1445692452_28c90246c563a621b78bfa7c2976b7d3",
+              length: 15.048
+              },
+              {
+              id: "10154094215798306",
+              description: "Everyone’s a happy camper with an ice-cold Coca-Cola to cool you down on a hot day! #sharehappiness",
+              updated_time: "2015-04-19T05:00:01+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xta1/v/t15.0-10/p160x160/11114459_10154094216033306_509621126_n.jpg?oh=fa34df9896886c6e26387816fa0f474c&oe=56883A59&__gda__=1454984300_baf442287426c3bc0b81384c92360a69",
+              source: "https://fbcdn-video-l-a.akamaihd.net/hvideo-ak-xpf1/v/t42.1790-2/11052115_10154094216328306_157287339_n.mp4?efg=eyJybHIiOjYxMCwicmxhIjo1MTIsInZlbmNvZGVfdGFnIjoidjFfNDAwX2NyZl8yN19tYWluXzMuMF9zZCJ9&rl=610&vabr=339&oh=b77c52b7762eb447609cc7075c41d869&oe=562B8816&__gda__=1445741794_739b8e220c5edbf7875575a22ac30a09",
+              length: 1.198
+              },
+              {
+              id: "10154094212283306",
+              description: "Holding out an ice-cold Coca-Cola is like giving a high-five! TAG a friend to wish them a Happy #HighFive Day!",
+              updated_time: "2015-04-17T14:59:36+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xft1/v/t15.0-10/p160x160/11114868_10154094212703306_1689477326_n.jpg?oh=be0846c732dc1d1468e63734d3f2b6e7&oe=5686F96B&__gda__=1456269167_6711fb309bfb0831ed44d42a4d489be2",
+              source: "https://fbcdn-video-o-a.akamaihd.net/hvideo-ak-xap1/v/t42.1790-2/10976012_10154094212928306_1603897887_n.mp4?efg=eyJybHIiOjMwMCwicmxhIjo1MTIsInZlbmNvZGVfdGFnIjoidjFfNDAwX2NyZl8yN19tYWluXzMuMF9zZCJ9&rl=300&vabr=22&oh=7e16860b3e3b0927c93cf4258464373b&oe=562C9604&__gda__=1445740991_d7df20f478e199c67ebfc415f60f3a28",
+              length: 6.7
+              },
+              {
+              id: "10154094138533306",
+              description: "Which filter looks best on #CocaCola? You guessed right! #EveryFilter! What are your go-to filters?",
+              updated_time: "2015-04-17T14:27:01+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpa1/v/t15.0-10/p160x160/11048870_10154094139523306_163503364_n.jpg?oh=e08799c70b46f0f4a85581c9607478c8&oe=56BF44C8&__gda__=1455945664_ca3c7f4deb6618a076304a5120ff990d",
+              source: "https://video.xx.fbcdn.net/hvideo-xfp1/v/t43.1792-2/11055019_10154094139348306_844421160_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=459&oh=47fb5ad2500dd7f4ad12b9e56b13b81e&oe=562CAAA0",
+              length: 10.71
+              },
+              {
+              id: "10154047417438306",
+              description: "Join us for the ultimate Movement is Happiness event! Be there at the Coca-Cola Retro Zone @TheMusicRun on 11 April 2015! Remember, the more you move, the happier you feel! #movementishappiness",
+              updated_time: "2015-03-29T02:29:15+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpf1/v/t15.0-10/p128x128/11085961_10154047419623306_1564295010_n.jpg?oh=d1b889ff2060b3583a211aa487d7a798&oe=56C66D40&__gda__=1451829395_07c055f2234038fa57f218552e75ca36",
+              source: "https://video.xx.fbcdn.net/hvideo-xpf1/v/t43.1792-2/11067363_10154032250743306_100679623_n.mp4?efg=eyJybHIiOjMyMjksInJsYSI6NDA5NiwidmVuY29kZV90YWciOiJoZCJ9&rl=3229&vabr=2153&oh=5fa72c9747a6c305be611f0419525d56&oe=562C9896",
+              length: 105
+              },
+              {
+              id: "10154001858223306",
+              description: "SHARE to spread #openhappiness with your friends!",
+              updated_time: "2015-03-18T04:00:01+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpa1/v/t15.0-10/p160x160/10963473_10154001858878306_1230617922_n.jpg?oh=b3e53878787c329dd8c99126171b4976&oe=56B7CAD0&__gda__=1451921439_60ddf2ea26d6fbfb2e7fae5f5513eb0d",
+              source: "https://video.xx.fbcdn.net/hvideo-xap1/v/t43.1792-2/1970382_10154001858653306_780853605_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=231&oh=04ec7e984d99dceb451849f1ea923273&oe=562B75D4",
+              length: 8.875
+              },
+              {
+              id: "10154001855543306",
+              description: "Celebrate the ultimate refreshment of Coca-Cola and ice! Happy Friday everyone :)",
+              updated_time: "2015-03-13T04:00:02+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xaf1/v/t15.0-10/p160x160/10963489_10154001856738306_1216801272_n.jpg?oh=80d2cd1c7662410f0ce71a500913dee1&oe=56CFFB02&__gda__=1455064132_9eee06bbfd2c39ddb9ebe5c4d02a268d",
+              source: "https://fbcdn-video-d-a.akamaihd.net/hvideo-ak-xfa1/v/t43.1792-2/11052697_10154001856538306_770560171_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=205&oh=d4ee57cedf02e8e1ae7ab1fd63afef7d&oe=562C55C6&__gda__=1445739192_1d6afcd858e487ea04e9e1496fb155c8",
+              length: 15.015
+              },
+              {
+              id: "10153934638458306",
+              description: "Let your days be smooth and! bright with Coca-Cola! Xiang Yun wishes to #sharehappiness an! d greetings of prosperity to all families!",
+              updated_time: "2015-06-19T23:14:46+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpt1/v/t15.0-10/p128x128/10963539_10153934682348306_10153934638458306_212_1207_b.jpg?oh=5003f955cd81aa3283503bb0ca44df38&oe=56CE8D77&__gda__=1456644909_330560741936afc4b20f82f1c95efa02",
+              source: "https://video.xx.fbcdn.net/hvideo-xfa1/v/t43.1792-2/10952712_10153934682218306_1881683398_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=480&oh=fc698246f89c6f2fec95d1619c18b5bb&oe=562C43D3",
+              length: 20
+              },
+              {
+              id: "10153934578778306",
+              description: "This Chinese New Year, take the time to #sharehappiness with your loved ones. Romeo Tan and Coca-Cola wishes everyone a prosperous and happy life.",
+              updated_time: "2015-02-14T16:00:04+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xtf1/v/t15.0-10/p128x128/10876259_10153934620238306_10153934578778306_41636_659_b.jpg?oh=7aa90715f0c6e14f5c7ebdba9646f113&oe=568A45D6&__gda__=1455392616_da6f2ed5d4f1e910777c889c337dbae5",
+              source: "https://video.xx.fbcdn.net/hvideo-xaf1/v/t43.1792-2/10930241_10153934620118306_217130836_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=615&oh=78569624ffda04bccf1463129c4792ce&oe=562C8119",
+              length: 20
+              },
+              {
+              id: "10153934483658306",
+              description: "This Chinese New Year, dedicate your special #CNY greetings to your loved ones with the auspicious Coca-Cola cans! Ya Hui and Coca-Cola wishes everyone a year filled with abundant happiness!",
+              updated_time: "2015-02-10T16:00:02+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpf1/v/t15.0-10/p128x128/10963723_10153934548098306_10153934483658306_29508_2347_b.jpg?oh=eb757508838f4e8436d772db2ad45649&oe=56C6AC48&__gda__=1451994362_48276dfb255901045ce6b4ca660ef13f",
+              source: "https://fbcdn-video-j-a.akamaihd.net/hvideo-ak-xpf1/v/t43.1792-2/10894056_10153934547983306_1572715308_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=410&oh=ea79386072ea803bf71b83f4e4d20303&oe=562C70D1&__gda__=1445768812_3b5225fb536d0ae062ad36c3ff330c18",
+              length: 20
+              },
+              {
+              id: "10153934405228306",
+              description: "Felicia Chin wishes all Coca-Cola fans and their families a wonderful Chinese New Year filled with prosperity and overflowing happiness! #Sharehappiness now!",
+              updated_time: "2015-02-09T15:01:21+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xaf1/v/t15.0-10/p128x128/10955874_10153934457153306_10153934405228306_65068_755_b.jpg?oh=0c8bd7c6f6540325170e72a777cda7f8&oe=568B7BE8&__gda__=1456425939_66b1bc835a3febe7f843d3143b3d7592",
+              source: "https://video.xx.fbcdn.net/hvideo-prn2/v/t43.1792-2/10857034_10153934457033306_1117732782_n.mp4?efg=eyJybHIiOjE1MDAsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1500&vabr=422&oh=8aa2909dcae6c97b903921d5910c92c3&oe=562C5803",
+              length: 20
+              },
+              {
+              id: "10153926105033306",
+              name: "Sundays @ The Park",
+              description: "When was the last time you had family picnic or played a game of hopscotch with your kids? Kick-start your week with Sundays @ The Park – a programme by the Health Promotion Board together with ActiveSG, NParks and Coca-Cola. Get moving with us! #movementishappiness More details at: www.cokeurl.com/sundays",
+              updated_time: "2015-02-05T16:18:50+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xfa1/v/t15.0-10/p128x128/50700_10153926115073306_10153926105033306_1908_656_b.jpg?oh=d78ad2660ec752024fa0fd53f5d6bcc1&oe=568C3092&__gda__=1455900103_7e948fce3199c119afb0197ccee1ae7e",
+              source: "https://fbcdn-video-b-a.akamaihd.net/hvideo-ak-xfa1/v/t43.1792-2/10322043_10153926114958306_1652363946_n.mp4?efg=eyJybHIiOjE1NjQsInJsYSI6MTAyNCwidmVuY29kZV90YWciOiJoZCJ9&rl=1564&vabr=1043&oh=2b45d240e856ebe47fbcc4919bd80521&oe=562C577D&__gda__=1445693644_5693b3d1f638a94ef529ad76868d14d4",
+              length: 29.96
+              },
+              {
+              id: "10153883595263306",
+              description: "Refresh and delight your family and friends as you wish them ‘Gong Xi Fa Cai’ with these limited edition Coca-Cola cans. Collect all 8 of the specially designed cans which bear lucky Chinese characters. Spread the good fortune when you #sharehappiness now!",
+              updated_time: "2015-03-03T02:53:30+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpf1/v/t15.0-10/p128x128/10840920_10153883652028306_10153883595263306_50396_2697_b.jpg?oh=b15a7e2c1a52a3667a6ac427ade2294e&oe=56D22029&__gda__=1451700379_d9973e6bb0182c3655ee6ab20af57c6c",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpa1/v/t43.1792-4/10248039_10153883651713306_360133649_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=a00e77d706038aa512c004d47cf580c6&oe=562C3741&__gda__=1445749961_15bc3d1ca3bdefe2a5cbadec574c3d6f",
+              length: 30
+              },
+              {
+              id: "10153777156463306",
+              description: "A magical winter wonderland arrives in sunny Singapore. Watch as Finland and Singapore #shareawhitechristmas at Raffles City Singapore!",
+              updated_time: "2015-06-19T23:12:45+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xft1/v/t15.0-10/p128x128/10381712_10153777161993306_10153777156463306_38692_2033_b.jpg?oh=837c9d959bc00ca49d57b1805dbe4776&oe=56BE276E&__gda__=1456046435_83b3b110427f9de334fc93340bd65f0f",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-prn2/v/t43.1792-4/10827629_10153777161593306_614334869_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=f5a29c65deb2a654be27b871ab921280&oe=562C9A62&__gda__=1445773498_1bb4e62c2131d148308f3571e332bd48",
+              length: 103.8
+              },
+              {
+              id: "10153743201698306",
+              description: "Need an instant burst of refreshment? Check out this cool #minihappiness hack. 1 more week to participate in our simple and easy contest. Xbox Ones and GoPros to be won: www.cokeurl.com/minihappiness",
+              updated_time: "2014-12-06T19:55:37+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpa1/v/t15.0-10/p160x160/10821083_10153743202148306_10153743201698306_57812_818_b.jpg?oh=fdd5e3d348b3fbe3e9209a9cc23c5d43&oe=56C240B7&__gda__=1456426126_6335a94abc2d24fee9126ab913bf4949",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xpf1/v/t43.1792-4/10444355_10153743202133306_160353674_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=94d43dab553e3d080db3faed08bd2c8f&oe=562C7BAE&__gda__=1445751582_57181e2e0d21abae75cb414764a38733",
+              length: 14
+              },
+              {
+              id: "10153743193088306",
+              description: "Fantasy or reality? Watch and decide..! . Last call to win Xbox Ones and GoPros in our #minihappiness contest: www.cokeurl.com/minihappiness",
+              updated_time: "2014-12-08T01:00:01+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpa1/v/t15.0-10/p160x160/10821056_10153743193608306_10153743193088306_12708_1251_b.jpg?oh=d5a2d4a799f4386c2ba689ec3bc9af8c&oe=56C1D4FD&__gda__=1456372579_46a419e025709dd3c04ccc7970b8d7f8",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-ash2/v/t43.1792-4/10804135_10153743193588306_1778399489_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=68650edefd93c28718c0fab255356674&oe=562C86D9&__gda__=1445765141_d8f2d793586f10b9cd744113b9c011b9",
+              length: 11.32
+              },
+              {
+              id: "10153739348493306",
+              description: "Happiness appears when you least expect it. More #minihappiness to be found with our Xbox One and GoPro contest giveaway: www.cokeurl.com/minihappiness",
+              updated_time: "2014-12-03T16:38:54+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xaf1/v/t15.0-10/p160x160/10677643_10153739349103306_10153739348493306_54980_876_b.jpg?oh=f0dce5cb9711a3aadf1e451196eb262f&oe=56CA7DDA&__gda__=1452252641_fe23cbc15f81ddb32d55bddec9f24e49",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-frc3/v/t43.1792-4/10829855_10153739349078306_2132508812_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=28f008d54661e68e2dab63a3b4e9bca4&oe=562C6D06&__gda__=1445764787_da0538eb07cc72ba3d5a95533a9e3c46",
+              length: 9.56
+              },
+              {
+              id: "10153734731723306",
+              description: "Experience your next meal with a refreshing burst of local flavour. Coca-Cola with food. Better together.",
+              updated_time: "2015-06-19T23:09:25+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xpa1/v/t15.0-10/p128x128/10821378_10153734732158306_10153734731723306_34700_1637_b.jpg?oh=ac620d409e6eac63806fe4059a23f558&oe=56C6AED2&__gda__=1455531852_0132de4904319058378d48c473f0020a",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-prn2/v/t43.1792-4/10804136_10153734732128306_1572353843_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=484e25179df5582a61232c406358d3aa&oe=562C83F1&__gda__=1445693534_d8f1eba9dd3be46f7fd28cb2718f7571",
+              length: 30.04
+              },
+              {
+              id: "10153731031738306",
+              description: "A mind-blowing way to share #minihappiness with your friends. Xbox Ones and GoPros also up for grabs: www.cokeurl.com/minihappiness",
+              updated_time: "2014-11-29T20:23:21+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xfa1/v/t15.0-10/p160x160/1095214_10153731032983306_10153731031738306_20172_459_b.jpg?oh=c2277f74b3e7897cbbc471801a6d39c3&oe=568C29E5&__gda__=1451696403_1ddebfa911f3348a5a1c831ffec72944",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xap1/v/t43.1792-4/10827486_10153731032973306_1905582918_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImhkIn0%3D&oh=9ba795054e2a9a31b35212d4d1c6d223&oe=562CA11B&__gda__=1445745320_4b175737e7540d88f6c062b0e3f1cf04",
+              length: 12.04
+              },
+              {
+              id: "10153698778433306",
+              description: "Can a video really show you what you'll experience when you take the stage with Avicii in Vegas? Not even close. But hey, it's still pretty awesome. #ShareTheSound And before you stand with Avicii on stage, stand with him now when you join us, along with @(RED), in the fight for an #AIDSFreeGen. Enter: http://bit.ly/Coke-Avicii",
+              updated_time: "2015-06-19T23:09:05+0000",
+              picture: "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p128x128/1394748_10153698785658306_10153698778433306_52444_1004_b.jpg?oh=3266d88ca4f26412db337d67da7162c4&oe=56C6BD3E&__gda__=1455342305_04b7f6e2e69dafd7bbb3e61e11ec337d",
+              source: "https://fbcdn-creative-a.akamaihd.net/hads-ak-xtp1/v/t43.1792-4/10480083_10153698785583306_311711172_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6ImxlZ2FjeV9oZCJ9&oh=588c9b246e67022e29b3a8a7490d87a1&oe=562CA634&__gda__=1445768796_1d93a9a9adf9edd29fc77cbc6c685adb",
+              length: 73.019
+              }
+              ];
       query="?fields=videos.fields(id,name,description,updated_time,picture,source,length)&"
       var link=url+$rootScope.brand+query+token;
       console.log(link);
@@ -691,7 +689,7 @@ app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce)
 	}
 });
 
-app.controller("product",function($scope,$rootScope){
+app.controller("product",function($scope,$rootScope,pullFb){
 
     $scope.title="Product";
     $scope.products=[
@@ -705,9 +703,10 @@ app.controller("product",function($scope,$rootScope){
       {src:"http://www.outdoortechnology.com/core/media/media.nl/id.518000/c.1283311/.f?h=73234cbb6ff484518db0",descr:"",title:"Outdoor Tech Wireless Headphones",price:"$116.00"},
       {src:"http://hsto.org/getpro/habr/post_images/e40/c25/6a7/e40c256a72c6b0a9ed12bacfeef159a4.jpg",descr:"",title:"Neptune Pine",price:"$543.00"}
     ];
+    pullFb.analytics("Shop");
 });
 
-app.controller("deals",function($scope){
+app.controller("deals",function($scope,pullFb){
 
     $scope.title="Promotions";
     $scope.promotions=[
@@ -716,16 +715,19 @@ app.controller("deals",function($scope){
       {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Buy one get one free",title:"The Big Summer Promotion"},
       {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Check out our newest items on Sale",title:"The Big Summer Promotion"},
     ];
+    pullFb.analytics("Promotions");
 });
 
 app.controller("about",function($scope,$rootScope, pullFb){
     $scope.title="About us";
     $rootScope.about=pullFb.getAbout();
+    pullFb.analytics("About");
 });
 
 app.controller("events",function($scope,$rootScope,pullFb,ModalService){
     $scope.title="Events";
     $rootScope.events=pullFb.getEvents();
+      pullFb.analytics("Events");
     $scope.show = function(src) {
       $rootScope.src=src;
        ModalService.showModal({
@@ -738,7 +740,7 @@ app.controller("events",function($scope,$rootScope,pullFb,ModalService){
 app.controller("videos",function($scope,$rootScope,pullFb,$sce, ModalService){
     $scope.title="Videos";
     $rootScope.videos=pullFb.getVideos();
-
+      pullFb.analytics("Videos");
     $scope.show = function(src) {
       $rootScope.src=src;
       console.log(src);
@@ -753,15 +755,18 @@ app.controller("videos",function($scope,$rootScope,pullFb,$sce, ModalService){
 app.controller('ModalController', function($scope, close,$rootScope,$sce) {
 $scope.play = $sce.trustAsResourceUrl($rootScope.src);
 console.log($scope.play);
+  pullFb.analytics("Openlink");
  $scope.close = function(result) {
  	close(result, 500); // close, but give 500ms for bootstrap to animate
  };
 
  $scope.send=function(user,email,tel){
+   pullFb.analytics("Successful:Contact");
    console.log($rootScope.brand);
    console.log(user + email+tel);
    //save it and put it up
    this.close('yes');
+
  }
 
 });
@@ -774,6 +779,7 @@ $scope.init = function(){
      $rootScope.photos=pullFb.getPhotos();
   }
 });
+pullFb.analytics("Albums");
 app.controller("brands",function($scope,$rootScope,$http,pullFb){
     console.log("brands");
     $scope.init = function(){
@@ -818,6 +824,7 @@ app.controller("help",function($scope,$rootScope,$ionicLoading,pullFb, ModalServ
         });
 
     };
+    pullFb.analytics("Posts");
     $scope.clickSearch = function(){
         $scope.query = "";
     };
@@ -835,8 +842,10 @@ app.controller("load",function($scope,$rootScope,$stateParams,$sce,pullFb, Modal
   var link="https://fb-fan.herokuapp.com/#/app/"+$stateParams.id;
   $scope.link = $sce.trustAsResourceUrl(link);
   $rootScope.about=pullFb.getAbout();
+  pullFb.analytics("ViewDemo");
 
   $scope.signup=function(){
+    pullFb.analytics("Attempt:Contact");
     ModalService.showModal({
         templateUrl: 'views/signup.html',
         controller: "ModalController",
