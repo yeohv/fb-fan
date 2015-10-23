@@ -15,8 +15,8 @@ app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce)
 	return {
     analytics:function(e){
         ga('send','event','dev',e,$rootScope.brand);
-        console.log("ga:"+e", "+$rootScope.brand);
-    }),
+        console.log("ga:"+e+", "+$rootScope.brand);
+    },
 		getPosts: function(){
       //console.log("getPosts:"+$rootScope.brand);
       query="/?fields=posts.fields(name,link,source,description,place,created_time,message,likes.limit(1).summary(true),comments.limit(1).summary(true),shares,picture)&";
