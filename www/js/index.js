@@ -781,7 +781,7 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
     }
     $scope.send=function(b){
       var brand=b;
-      $.ajax({
+      $http({
                   url: 'http://fb-server.herokuapp.com/send',
                   type: 'POST',
                   data: "TEST",
