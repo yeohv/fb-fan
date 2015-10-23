@@ -1,4 +1,4 @@
-var app=angular.module('starter', ['ionic','angularModalService','retrieve']);
+var app=angular.module('starter', ['ionic','angularModalService']);
 
 app.run(function($rootScope){
   $rootScope.accesstoken="CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU";
