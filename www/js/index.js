@@ -779,6 +779,15 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
     $scope.init = function(){
       $scope.title="Brands";
     }
+    $scope.send=function(b){
+      var brand=b;
+      $.ajax({
+                  url: 'http://fb-server.herokuapp.com/send',
+                  type: 'POST',
+                  data: "TEST",
+                  success: function() { }
+              });
+    }
     $scope.search=function(query){
       $rootScope.brands=pullFb.getBrands(query);
       console.log($rootScope.brands);
