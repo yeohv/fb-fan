@@ -26,8 +26,8 @@ text-decoration:none !important;
   border: 1px solid black;
 }
 .window{
-  padding-left: 25px;
   float:left;
+  padding:40px 160px;
 }
 
 .test{
@@ -559,4 +559,9 @@ right:0;
   padding-left:20px;
   font-size: 15px;
 line-height: 20px;
+}
+
+.load-card{
+  padding:0;
+  margin:5px;
 }
