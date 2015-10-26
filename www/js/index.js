@@ -832,6 +832,7 @@ app.controller("help",function($scope,$rootScope,$ionicLoading,pullFb, ModalServ
 
     $scope.show = function(src) {
       $rootScope.src=src;
+      console.log(src);
        ModalService.showModal({
            templateUrl: 'views/template.html',
            controller: "ModalController",
