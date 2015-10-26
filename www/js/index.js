@@ -808,6 +808,10 @@ $scope.init = function(){
   }
 });
 
+app.controller("menu",function($ionicLoading,pullFb,$rootScope){
+  console.log("menu"),
+  pullFb.getAbout();
+});
 app.controller("brands",function($scope,$rootScope,$http,pullFb){
     console.log("brands");
 
