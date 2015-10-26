@@ -7,6 +7,7 @@ app.run(function($rootScope){
 
 app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce) {
   $rootScope.brand=$stateParams.id;
+    $rootScope.id=$stateParams.id;
 	var url= "https://graph.facebook.com/v2.3/";
   var token="access_token="+$rootScope.accesstoken;
   var query="";
@@ -730,6 +731,7 @@ app.controller("events",function($scope,$rootScope,pullFb,ModalService){
       pullFb.analytics("Events");
     $scope.show = function(src) {
       $rootScope.src=src;
+        console.log(src);
        ModalService.showModal({
            templateUrl: 'views/template.html',
            controller: "ModalController",
