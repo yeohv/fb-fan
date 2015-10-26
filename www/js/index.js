@@ -844,12 +844,12 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
       var id=brand.id;
       var email=brand.emails[0];
       console.log(email);
-      var email1="vanessa@meqo.com";
+      var email1="stacy@meqo.com";
       var name=brand.name;
       var contactedId={};
       contactedId.id=id;
       $http({
-                  url: 'https://fan-server.herokuapp.com/send'+"?id="+id+"&email="+email1+"&name="+name,
+                  url: 'https://fan-server.herokuapp.com/send'+"?id="+id+"&email="+email1"&name="+name,
                   type: "GET",
                   success: function() {
                   }
