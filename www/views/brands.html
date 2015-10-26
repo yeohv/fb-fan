@@ -11,7 +11,7 @@
     <button class="button button-dark" ng-click="address(add,query)">search</button>
   </div>
   <ion-content class="has-header" ng-init="init()">
-    <div collection-repeat="brand in brands| orderBy: 'likes'">
+    <div collection-repeat="brand in brands| orderBy: '-likes'">
       <div class="list brands-list">
         <a class="item-thumbnail-left">
           <h2 class="color1"><strong><span class="highlight">#{{$index + 1}} </span>- {{brand.name}}</strong></h2>
