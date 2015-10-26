@@ -3,13 +3,13 @@
     <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="toggleSearch()"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <div collection-repeat="promo in promotions">
-      <div class="list">
-        <a class="item-thumbnail-left">
-          <img class="src" ng-src="{{promo.src}}">
-          <h5 class="color-p">{{promo.title}}</h5>
-          <h5 class="color-p">{{promo.descr}}</h5>
-        </a>
+    <div collection-repeat="promo in promotions" class="item item-text-wrap photo-card">
+      <div class="card">
+
+          <img class="promo-src" ng-src="{{promo.src}}">
+          <h5 class="promo-p">{{promo.title}}</h5>
+          <h5 class="promo-p">{{promo.descr}}</h5>
+
 
         <ion-item class="tabs tabs-secondary tabs-icon-left dark">
           <a class="tab-item color" ng-click="view(deal)" ng-class="{favouriteClass:deal.claimed=='claimTrue'}" ng-click="!showSearch">

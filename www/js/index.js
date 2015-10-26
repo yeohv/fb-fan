@@ -710,10 +710,10 @@ app.controller("deals",function($scope,pullFb){
 
     $scope.title="Promotions";
     $scope.promotions=[
-      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Check out our newest items on Sale",title:"The Big Summer Promotion"},
-      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"10% off Selected Items",title:"The Big Summer Promotion"},
-      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Buy one get one free",title:"The Big Summer Promotion"},
-      {src:"https://www.buckeyehvacparts.com/wp-content/themes/cheap-hvac-parts/images/image_coming_soon.png",descr:"Check out our newest items on Sale",title:"The Big Summer Promotion"},
+      {src:"http://cdn1.greatdeals.com.sg/wp-content/uploads/2013/12/zalora-revolution-day.png",descr:"Get 25% off our newest items with our promo code",title:"The Big Summer Promotion"},
+      {src:"http://www.passionforsavings.com/wp-content/uploads/2011/09/1068.jpg",descr:"50% off Selected Items",title:"Mid-season sale"},
+      {src:"http://couponicious.com.sg/wp-content/uploads/2013/09/9-2-2013-11-31-41-AM.jpg",descr:"Check out our new breakfast menu",title:"Live well eat well"},
+      {src:"http://charlotterestauranttraffic-flywheel.netdna-ssl.com/wp-content/uploads/2015/10/ProjectPINK.jpg",descr:"Bring one person to get free Entry",title:"Celebrating New Years"},
     ];
     pullFb.analytics("Promotions");
 });

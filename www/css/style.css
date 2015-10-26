@@ -550,3 +550,13 @@ right:0;
 .mobile-bdg .overlay .strong{
   color:#9B90C5;
 }
+.promo-src{
+  width: 400px;
+  height:200px;
+}
+.promo-p{
+  text-align: left;
+  padding-left:20px;
+  font-size: 15px;
+line-height: 20px;
+}
