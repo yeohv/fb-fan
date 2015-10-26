@@ -482,7 +482,15 @@ right:0;
 .brands-list .item-thumbnail-left .color1{
   text-align: left;
   padding-left: 30px;
+
 }
+
+.brands-list .item-thumbnail-left .fbContacted{
+    color:#5C192D !important;
+    background-color: #D0BFFF !important;
+    width:50%;
+}
+
 
 .brands-list .color1 p{
   text-align:left;
@@ -573,4 +581,7 @@ line-height: 20px;
 .load-card{
   padding:0;
   margin:5px;
+}
+.retrieve{
+  width: 100%;
 }

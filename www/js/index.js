@@ -1,9 +1,10 @@
-var app=angular.module('starter', ['ionic','angularModalService']);
+var app=angular.module('starter', ['ionic','angularModalService','brands']);
 
 app.run(function($rootScope){
   $rootScope.accesstoken="CAAG36gDjUaIBAOv2NMFvHh8ZBtsaQeaD7BSuDpbvcJtrHJvGQUK5ILcu9k8EJZBq6UZBMAEiYB0cDCducjUg27KaXLnZAd00Dr0B0n2H6pAHaCDs6BH5hq8hUw8W7vPtbGeCNSiaNrZCOrhGkNuTrASTcoS8PtoRFPnSpd3Ha440Bvbr07AUU";
 
 });
+
 
 app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce) {
   $rootScope.brand=$stateParams.id;
@@ -56,6 +57,7 @@ app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce)
         console.log(data);
         $rootScope.brands=data;
         $ionicLoading.hide();
+
         return $rootScope.brands;
 			});
 		},
@@ -71,7 +73,21 @@ app.factory('pullFb', function($http,$rootScope,$stateParams,$ionicLoading,$sce)
 				data = response.data.data;
         console.log("============================ BRANDS ============================ ");
         console.log(data);
+
         $rootScope.brands=data;
+
+        console.log($rootScope.contacted[0]);
+        console.log($rootScope.brands[3]);
+        for(var i=0;i<$rootScope.brands.length;i++){
+          for(var x=0;x<$rootScope.contacted.length;x++){
+        //  if($rootScope.contacted.indexOf($rootScope.brands[i] === -1)){
+          if($rootScope.contacted[x]==$rootScope.brands[i].id){
+            console.log("HEREHEHREHHRHEHRHERHEHHREHRHEHRHERHE");
+          }else{
+            console.log("skipped");
+          }
+        }
+      }
         $ionicLoading.hide();
         return $rootScope.brands;
 			});
@@ -762,12 +778,21 @@ console.log($scope.play);
  	close(result, 500); // close, but give 500ms for bootstrap to animate
  };
 
- $scope.send=function(user,email,tel){
+ $scope.send=function(user,email,message,tel){
    pullFb.analytics("Successful:Contact");
    console.log($rootScope.brand);
-   console.log(user + email+tel);
+   console.log(user +email+message+tel);
    //save it and put it up
    this.close('yes');
+   var person = {};
+   person.name = user;
+   person.email = email;
+   person.message = message;
+   person.tel = tel;
+
+   OnokoDB.put("fb-fan-brandsResults",person,function(data){
+      console.log(data);
+   });
 
  }
 
@@ -785,20 +810,46 @@ $scope.init = function(){
 
 app.controller("brands",function($scope,$rootScope,$http,pullFb){
     console.log("brands");
+
     $scope.init = function(){
       $scope.title="Brands";
+
+      OnokoDB.list("fb-fan-contact",function(people){
+        var teste=[];
+        $rootScope.contacted=[];
+        console.log("contacted");
+        console.log(people);
+
+        for(var x=0;x<people.length;x++){
+          teste.push(people[x].id);
+
+        }
+        $scope.contacted=teste;
+      });
+
+
     }
     $scope.send=function(b){
       var brand=b;
       var id=brand.id;
       var email=brand.emails[0];
+      console.log(email);
+      var email1="vanessa@meqo.com";
       var name=brand.name;
+      var contactedId={};
+      contactedId.id=id;
       $http({
-                  url: 'https://fan-server.herokuapp.com/send'+"?id="+id+"&email="+email+"&name="+name,
+                  url: 'https://fan-server.herokuapp.com/send'+"?id="+id+"&email="+email1+"&name="+name,
                   type: "GET",
-                  success: function() { }
-              });
+                  success: function() {
+                  }
+      });
+    OnokoDB.put("fb-fan-contact",contactedId,function(data){
+      console.log(data);
+    });
+
     }
+
     $scope.search=function(query){
       $rootScope.brands=pullFb.getBrands(query);
       console.log($rootScope.brands);
@@ -865,9 +916,26 @@ app.controller('home', function($scope, $location, $anchorScroll) {
    }
 });
 
-app.controller("menu",function($ionicLoading,pullFb,$rootScope){
-  console.log("menu"),
-  pullFb.getAbout();
+app.controller("brandsResult",function($scope,$rootScope,$http){
+  console.log("brandsResult");
+  $scope.listPeople=function(){
+    OnokoDB.list("fb-fan-brandsResults",function(people){
+      console.log("p");
+      $.each(people, function(i, field){
+        var table = document.getElementById("content");
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+
+        cell1.innerHTML = field.name;
+        cell2.innerHTML = field.email;
+        cell3.innerHTML = field.message;
+        cell4.innerHTML = field.tel;
+      });
+    });
+  }
 });
 
 app.filter('dateFormat', function($filter)
@@ -886,6 +954,7 @@ app.filter('dateFormat', function($filter)
       $stateProvider.state('app', {url: ':id',abstract: true,templateUrl: 'views/menu.html',controller:'menu'})
       .state('load',{url:'/demo/:id',templateUrl: 'views/load-brand.html',controller:'load'})
       .state('brands', {url:'/brands',templateUrl: 'views/brands.html',controller:'brands'})
+      .state('brandsResult', {url:'/brandsResult',templateUrl: 'views/brands-contact.html',controller:'brandsResult'})
       .state('app.help',{url:'/app/:id',views:{menuContent: {templateUrl: 'views/list.html',controller:'help'}}})
       .state('app.product', {url:'/app/:id/product',views: {menuContent: {templateUrl: 'views/product.html',controller:'product'}}})
       .state('app.deals', {url:'/app/:id/deals',views: {menuContent: {templateUrl: 'views/deals.html',controller:'deals'}}})
