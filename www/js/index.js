@@ -824,7 +824,7 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
     $scope.init = function(){
       $scope.title="Brands";
 
-      OnokoDB.list("fb-fan-contact",function(people){
+      OnokoDB.list("fb-fan-contacted",function(people){
         var teste=[];
         $rootScope.contacted=[];
         console.log("contacted");
@@ -854,7 +854,7 @@ app.controller("brands",function($scope,$rootScope,$http,pullFb){
                   success: function() {
                   }
       });
-    OnokoDB.put("fb-fan-contact",contactedId,function(data){
+    OnokoDB.put("fb-fan-contacted",contactedId,function(data){
       console.log(data);
     });
 
